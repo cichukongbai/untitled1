@@ -16,7 +16,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ae3f5e8-af93-4204-928f-db560651454a" name="Default Changelist" comment="v2.0，十个要求未完成" />
+    <list default="true" id="8ae3f5e8-af93-4204-928f-db560651454a" name="Default Changelist" comment="v2.0，十个要求未完成">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +89,7 @@
       </set>
     </option>
   </component>
-  <component name="JupyterTrust" id="d98cc92a-1872-43c7-9788-5b477f0c41a5" />
+  <component name="JupyterTrust" id="01823cdb-69a0-4fc0-b8dc-69968ac6ea36" />
   <component name="ProjectId" id="1lQXGF91qUwkGXd0v7j2TR77bjY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -250,7 +252,18 @@
       <workItem from="1627975943002" duration="689000" />
       <workItem from="1628043395752" duration="1279000" />
       <workItem from="1628059609972" duration="1924000" />
+      <workItem from="1628061840982" duration="1721000" />
+      <workItem from="1628063583326" duration="335000" />
+      <workItem from="1628064159049" duration="1016000" />
     </task>
+    <task id="LOCAL-00001" summary="v2.0 , 未完成10个要求">
+      <created>1628061960060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1628061960060</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,20 +291,22 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v2.0，十个要求未完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="v2.0，十个要求未完成" />
+    <MESSAGE value="v2.0 , 未完成10个要求" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.0 , 未完成10个要求" />
   </component>
   <component name="WindowStateProjectService">
     <state x="471" y="121" key="FileChooserDialogImpl" timestamp="1628043684956">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="471" y="121" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1628043684956" />
-    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog" timestamp="1628061747105">
+    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog" timestamp="1628064432121">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1628061747105" />
+    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1628064432121" />
     <state x="432" y="130" key="Github.UntrackedFilesDialog" timestamp="1628044660316">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -345,10 +360,10 @@
     </state>
     <state x="315" y="23" width="998" height="708" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1628059633387" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1623302292295" />
-    <state x="294" y="127" key="Vcs.Push.Dialog.v2" timestamp="1628061424677">
+    <state x="294" y="127" key="Vcs.Push.Dialog.v2" timestamp="1628061968215">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="294" y="127" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1628061424677" />
+    <state x="294" y="127" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1628061968215" />
     <state x="375" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1626249959039">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -361,6 +376,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="506" y="307" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.768@0.0.1366.768" timestamp="1628061430557" />
+    <state x="503" y="272" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1628065277813">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="503" y="272" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1366.768@0.0.1366.768" timestamp="1628065277813" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1625624074218">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
