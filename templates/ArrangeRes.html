@@ -1,0 +1,120 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+ <style>
+    .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl{
+        padding-top: 0px;
+        padding-right: 4px;
+        padding-left: 15px;
+}
+    </style>
+
+   <div class="content-body">
+            <!-- row 控制位置-->
+            <div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="nav nav-pills mb-3">
+							<!--<li class="nav-item"><a href="#list-view" data-toggle="tab" class="nav-link btn-primary mr-1 show active">List View</a></li>-->
+							<!--<li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid View</a></li>-->
+						</ul>
+					</div>
+					<div class="col-lg-12">
+						<div class="row tab-content">
+							<div id="list-view" class="tab-pane fade active show col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">
+{#                                            上海大学2021年春季学期延长校区课程安排结果浏览表#}
+                                            {% for palist in palist %}
+                                            {{ palist.School }}
+                                            {{ palist.SYear }}年
+                                            {{ palist.Semester }}学期
+                                                {% if palist.Campus_id == 0 %}
+                                                    宝山
+                                                {% elif palist.campus_id == 1 %}
+                                                    嘉定
+                                                {% elif palist.ampus_id == 2 %}
+                                                    延长
+                                                {% else  %}
+                                                    全部
+                                                {% endif %}
+                                                校区课程浏览表
+                                            {% endfor %}
+                                        </h4>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="example3" class="display" style="min-width: 845px">
+												<thead>
+													<tr>
+                                                        <th>序号</th>
+                                                        <th>课程编号</th>
+                                                        <th>课程名称</th>
+                                                        <th>教师号</th>
+                                                        <th>教师名称</th>
+                                                        <th>教室编号</th>
+                                                        <th>学分</th>
+                                                        <th>容量</th>
+                                                        <th>人数</th>
+                                                        <th>上课时间</th>
+                                                        <th>使用教室</th>
+                                                        <th>教室类别</th>
+                                                        <th>校区</th>
+													</tr>
+												</thead>
+
+
+												<tbody>
+                                                     {% for gg in gglist %}
+                                                            <tr>
+                                                                <td>{{ forloop.counter }}</td>
+                                                                <td>{{ gg.coID }}</td>
+                                                                <td>{{ gg.NAME }}</td>
+                                                                <td>{{ gg.TEACHNO }}</td>
+                                                                <td>{{ gg.TEACHNAME }}</td>
+                                                                <td>{{ gg.F1 }}</td>
+                                                                <td>{{ gg.CREDIT }}</td>
+                                                                <td>{{ gg.ENROLLS }}</td>
+                                                                <td>{{ gg.TOTALS }}</td>
+                                                                <td>{{ gg.TIMETEXT }}</td>
+                                                                <td>
+                                                                    {% if gg.NOTUSEROOM == '1' %}
+                                                                    否
+                                                                    {% elif gg.NOTUSEROOM == '0' %}
+                                                                      是
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>{{ gg.ROOM_id }}</td>
+                                                                <td>
+                                                                     {% if gg.campus_id == 0 %}
+                                                                        宝山
+                                                                    {% elif gg.campus_id == 1 %}
+                                                                        嘉定
+                                                                    {% elif gg.campus_id == 2 %}
+                                                                        延长
+                                                                    {% else  %}
+                                                                        其他
+                                                                    {% endif %}
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+
+            </div>
+        </div>
+
+
+
+
+
+{% endblock %}

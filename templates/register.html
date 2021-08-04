@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Edumin - Bootstrap Admin Dashboard </title>
+    <!-- Favicon icon -->
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/static/jquery-3.3.1.js"></script>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/bootstrap/images/favicon.png">
+    <link href="/static/bootstrap/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="h-100">
+<div class="authincation h-100">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-md-6">
+                <div class="authincation-content">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form">
+                                <h4 class="text-center mb-4">排课系统注册</h4>
+
+                                <form id="myform" action="login.html" novalidate>
+                                    {% csrf_token %}
+                                    {% for field in reg_form %}
+                                        <div class="form-group">
+                                            {# field.auto_id取出当前input框自动生成的id#}
+                                            <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                                            {{ field }} <span class="error pull-right"></span>
+                                        </div>
+                                    {% endfor %}
+                                    <input type="button" class="btn btn-primary" value="注册" id="submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       </div>
+        </div>
+    </div>
+</div>
+
+<!--**********************************
+    Scripts
+***********************************-->
+<!-- Required vendors -->
+{#<script src="/static/bootstrap/vendor/global/global.min.js"></script>#}
+{#<script src="/static/bootstrap/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>#}
+{#<script src="/static/bootstrap/js/dlabnav-init.js"></script>#}
+<!--endRemoveIf(production)-->
+</body>
+<script>
+    $("#submit").click(function () {
+        //ajax提交文件,得通过formdata对象
+        var formdata = new FormData()
+        //取到form表单
+        console.log($("#myform").serializeArray())
+        var upload_data = $("#myform").serializeArray()
+        //jq的循环:两个参数,第一个参数是要循环的对象,第二个参数传一个匿名函数
+        $.each(upload_data, function (index, obj) {
+            //这里添加的内容包括csrf的东西
+            formdata.append(obj.name, obj.value)
+        })
+
+        //把csrf添加到formdata中
+        formdata.append('csrfmiddlewaretoken','{{ csrf_token }}')
+
+        //提交ajax请求
+        $.ajax({
+            url: 'register.html',
+            type: 'post',
+            //上传文件
+            processData: false,
+            contentType: false,
+            data: formdata,
+            dataType:'json',
+            success: function (data) {
+                //console.log(data)
+                if(data.status==100){
+                    //注册成功,跳转
+                    location.href=data.url
+                    location.href='login.html'
+                }else {
+                    //console.log(data.msg)
+                    //清空错误信息
+                    $("span.error").text("")
+                    $(".form-group").removeClass('has-error')
+                    //循环错误信息
+                    $.each(data.msg,function (field,obj) {
+                        console.log(field)
+                        console.log(obj)
+                        //谁的错误,显示在谁的span中
+                        //支持链式操作
+                        var aa='#id_'+field
+                        $(aa).next().html(obj[0]).parent().addClass('has-error')
+
+                        //过3秒清掉错误信息
+                        setTimeout(function () {
+                            $("span.error").text("")
+                            $(".form-group").removeClass('has-error')
+                            //清掉value的值
+                        },3000)
+                    })
+                }
+            }
+        })
+    })
+</script>
+
+</html>

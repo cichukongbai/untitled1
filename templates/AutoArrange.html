@@ -1,0 +1,218 @@
+{% extends 'index-32.html' %}
+{% load my_tags %}
+{% block diy %}
+
+    <style>
+        .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl {
+
+            padding-right: 0px;
+            padding-left: 4px;
+        }
+
+        .form-control111 {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            color: #454545;
+        }
+
+        .form-control111 {
+        {#display: block;#} width: 15%;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.937rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #eaeaea;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    </style>
+
+    <div class="content-body">
+        <!-- row 控制位置-->
+        <div class="container-fluid">
+
+            <div class="a">
+                {#                        <form class="form-inline" >#}
+                <div class="form-group" style="width: 100%;">
+                    <label for="id_camp" style="padding-left: 15px">校区:<br></label>
+                    <select name="camp" id="id_camp">
+
+                        {% for c in cclist %}
+                            <option value='{{ c.CampusId }}'>{{ c.CampName }}</option>
+                        {% endfor %}
+
+                    </select>
+                    <label for="id_a">资源类型:<br></label>
+                    <select name="id_a" id="id_a">
+                        <option value='loose'>一门课程必须在同一教室上课(资源宽松型,速度快)</option>
+                        <option value='lack'>一门课程可以在不同教室上课(资源紧张型,速度慢)</option>
+                    </select>
+                    <label for="id_b">教室设置:<br></label>
+                    <select name="id_b" id="id_b">
+                        <option value='have'>按照选课库安排教室</option>
+                        <option value='not'>按照去掉"上机时段安排教室"</option>
+                    </select>
+
+                    <label for="id_remain">教室余量</label>
+                    <input type="text" id="id_remain" class="form-control111" placeholder={{ "备用座位数，如：10" }}>
+                    <button class="btn btn-sm btn-primary" onclick="id_autoarrangeadd(this)"
+                            style="padding-left: 15px;padding-right: 15px"> 提交
+                    </button>
+                </div>
+
+                <!--<button class="btn btn-sm btn-primary" id="id_re">重置</button><span class="error" style="color: red; margin-left: 10px"></span>-->
+                <!--  <p style="color: red">注：1.资源宽松型自动安排适合教室资源充足，安排速度快。 2.资源紧张型自动安排适合教室资源缺乏，安排速度慢。</p>-->
+
+                {#                        </form>#}
+
+                <!--排课结果显示原来的ArrangeRes.html-->
+                <div class="col-lg-12">
+                    <div class="row tab-content">
+                        <div id="list-view" class="tab-pane fade active show col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        {% for palist in palist %}
+                                            {{ palist.School }}
+                                            {{ palist.SYear }}年
+                                            {{ palist.Semester }}学期
+                                            {% if palist.Campus == 0 %}
+                                                宝山
+                                            {% elif palist.campus_id == 1 %}
+                                                嘉定
+                                            {% elif palist.campus_id == 2 %}
+                                                延长
+                                            {% else %}
+                                                其他
+                                            {% endif %}
+                                            校区课程浏览表
+                                        {% endfor %}
+                                    </h4>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example3" class="display" style="min-width: 845px">
+                                            <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>课程编号</th>
+                                                <th>课程名称</th>
+                                                <th>教师号</th>
+                                                <th>教师名称</th>
+                                                <th>教室编号</th>
+                                                <th>学分</th>
+                                                <th>容量</th>
+                                                <th>人数</th>
+                                                <th>上课时间</th>
+                                                <th>使用教室</th>
+                                                <th>教室类别</th>
+                                                <th>校区</th>
+                                            </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                            {% for gg in gglist %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ gg.coID }}</td>
+                                                    <td>{{ gg.NAME }}</td>
+                                                    <td>{{ gg.TEACHNO }}</td>
+                                                    <td>{{ gg.TEACHNAME }}</td>
+                                                    <td>{{ gg.F1 }}</td>
+                                                    <td>{{ gg.CREDIT }}</td>
+                                                    <td>{{ gg.ENROLLS }}</td>
+                                                    <td>{{ gg.TOTALS }}</td>
+                                                    <td>{{ gg.TIMETEXT }}</td>
+                                                    <td>
+                                                        {% if gg.NOTUSEROOM == 'FALSE' %}
+                                                            否
+                                                        {% elif gg.NOTUSEROOM == 'TRUE' %}
+                                                            是
+                                                        {% endif %}
+                                                    </td>
+                                                    <!--教室类别需要判断吗-->
+                                                    <td>{{ gg.ROOM1 }}</td>
+                                                    <td>
+                                                        {% if gg.campus_id == 0 %}
+                                                            宝山
+                                                        {% elif gg.campus_id == 1 %}
+                                                            嘉定
+                                                        {% elif gg.campus_id == 2 %}
+                                                            延长
+                                                        {% else %}
+                                                            其他
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+                                            <!--手动添加 开始-->
+                                            {#													<tr>#}
+                                            {#                                                        <td>1</td>#}
+                                            {#                                                        <td>2</td>#}
+                                            {#                                                        <td>3</td>#}
+                                            {#                                                        <td>4</td>#}
+                                            {#                                                        <td>5</td>#}
+                                            {#                                                        <td>6</td>#}
+                                            {#                                                        <td>7</td>#}
+                                            {#                                                        <td>8</td>#}
+                                            {#                                                        <td>9</td>#}
+                                            {#                                                        <td>10</td>#}
+                                            {#                                                        <td>否</td>#}
+                                            {#                                                        <td>12</td>#}
+                                            {#                                                        <td>13</td>#}
+                                            {#                                                    </tr>#}
+
+                                            <!--手动添加 结束-->
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script>
+
+        function id_autoarrangeadd(obj) {
+            {#$("#id_autoarrangeadd").click(function () {#}
+            $.ajax({
+                url: 'AutoArrange.html',
+                type: 'post',
+                data: {
+                    'id_a': $('#id_a').val(),
+                    'id_b': $('#id_b').val(),
+                    'id_remain': $('#id_remain').val(),
+                    'id_camp': $('#id_camp').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 103) {
+                        alert(data.msg)
+                        location.href = 'ArrangeRes.html'
+
+                    } else {
+                        alert(data.msg)
+
+
+                    }
+                }
+            })
+        }
+    </script>
+
+{% endblock %}

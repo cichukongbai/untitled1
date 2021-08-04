@@ -1,0 +1,199 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+ <style>
+    .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl{
+        padding-top: 15px;
+        padding-right: 0px;
+        padding-left: 15px;
+}
+  .form-group {
+            margin-bottom: 3rem;
+        }
+        .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto, .col-xxl-1, .col-xxl-2, .col-xxl-3, .col-xxl-4, .col-xxl-5, .col-xxl-6, .col-xxl-7, .col-xxl-8, .col-xxl-9, .col-xxl-10, .col-xxl-11, .col-xxl-12, .col-xxl, .col-xxl-auto{
+            position: relative;
+            width: 100%;
+            padding-right: 30px;
+            padding-left: 15px
+        }
+
+    </style>
+   <div class="content-body"  >
+            <!-- row 控制位置-->
+            <div class="container-fluid" >
+				<div class="row"  >
+					<div class="col-lg-12" >
+						<div class="row tab-content" >
+							<div id="list-view" class="tab-pane fade active show col-lg-12" >
+								<div class="card" style="width: 100%;padding-left: 3%;padding-right: 3% " >
+									<div class="card-header" >
+										<h4 class="card-title" >临时调配
+                                        </h4>
+									</div>
+
+								 	<div class="card-body" >
+                                        <div class="row" >
+                                        <div class="form-group" style="width: 33%;">
+{#                                            <p style="color: red;font-size: large">*选择校区</p>#}
+                                                <label for="id_camp" >校区</label>
+                                                <select name="camp" id="id_tempcamp" class="form-control" >
+                                                    <option value='宝山'>宝山</option>
+                                                    <option value='嘉定'>嘉定</option>
+                                                    <option value='延长'>延长</option>
+
+                                                </select>
+                                        </div>
+                                            <div class="form-group" style="width: 33%;padding-left: 2%">
+{#                                            <p style="color: red;font-size: large">*选择校区</p>#}
+                                                <label >教师编号</label>
+                                                <input type="text" id="id_temptechno" class="form-control" >
+                                            </div>
+                                           <div class="form-group" style="width: 33%;padding-left: 2%">
+{#                                            <p style="color: red;font-size: large">*选择校区</p>#}
+                                                <label >课程编号</label>
+                                                <input type="text" id="id_tempcourseno" class="form-control" >
+                                            </div>
+
+                                        <!--新添加调课信息教师编号和课程变编号-->
+
+                                        <div class="form-group" style="width: 33%;">
+{#                                            <p style="color: red;font-size: large">*选择校区</p>#}
+                                                <label >查找类型</label>
+                                                <select name="id_tempclasstype" id="id_tempclasstype" class="form-control" >
+                                                    <option value='教室编号'>教室编号</option>
+                                                    <option value='教室容量'>教室容量</option>
+                                                </select>
+                                        </div>
+                                        <div class="form-group" style="width: 33%;padding-left: 2%">
+                                                <label >查找类型对应参数</label>
+                                                <input type="text" id="id_tempname" class="form-control" placeholder="教室编号/教室容量数">
+                                            </div>
+
+                                        <div class="form-group" style="width: 33%;padding-left: 2%">
+                                                <label >教室类型</label>
+                                                <select name="ctype" id="id_tempctype" class="form-control" >
+                                                    {% for tt in ttlist %}
+                                                    <option value={{ tt.TypeName }}>{{ tt.TypeName }}</option>
+                                                    {% endfor %}
+{#                                                      <option value='多媒体'>多媒体</option>#}
+{#                                                    <option value='语音室'>语音室</option>#}
+{#                                                    <option value='普通教室'>普通教室</option>#}
+                                            </select>
+                                        </div>
+
+
+                                        <div class="form-group" style="width: 33%;">
+{#                                            <p style="color: red;font-size: large">*上课时间</p>#}
+                                            <label >排课时间</label>
+                                               <select name="id_tempweek" id="id_tempweek" class="form-control">
+                                                <option value='星期一'>星期一</option>
+                                                <option value='星期二'>星期二</option>
+                                                <option value='星期三'>星期三</option>
+                                                <option value='星期四'>星期四</option>
+                                                <option value='星期五'>星期五</option>
+                                                <option value='星期六'>星期六</option>
+                                                <option value='星期日'>星期日</option>
+                                               </select>
+                                        </div>
+{#                                        <div class="form-group" style="width: 33%;padding-left: 2%">#}
+{##}
+{#                                            <label > 节数</label>#}
+{#                                            <br>#}
+{#                                                <input type="radio" name="classnum" style="margin-left: 10px" value="1_2">1-2#}
+{#                                                <input type="radio" name="classnum" style="margin-left: 10px" value="3_4">3-4#}
+{#                                                <input type="radio" name="classnum" style="margin-left: 10px" value="5_6">5-6#}
+{#                                                <input type="radio" name="classnum" style="margin-left: 10px" value="7_8">7-8#}
+{#                                                <input type="radio" name="classnum" style="margin-left: 10px" value="9_10">9-10#}
+{#                                                <input type="radio" name="classnum" style="margin-left: 10px" value="11_13">11-13#}
+{##}
+{#                                        </div>#}
+                                         <div class="form-group" style="width: 33%;padding-left: 2%">
+{#                                            <p style="color: red;font-size: large">*选择校区</p>#}
+                                                <label >节数</label>
+{#                                                <input type="text" id="id_tempclassnum" class="form-control" placeholder="例如输入：1_4">#}
+                                             <select name="classnum" id="id_tempclassnum" class="form-control">
+                                                <option value='1_2'>1_2</option>
+                                                <option value='3_4'>3_4</option>
+                                                <option value='5_6'>5_6</option>
+                                                <option value='7_8'>7_8</option>
+                                                <option value='9_10'>9_10</option>
+                                                <option value='11_13'>11_13</option>
+
+                                               </select>
+                                            </div>
+
+                                        <div class="form-group"style="width: 33%;padding-left: 2%">
+                                            {#<p style="color: red;font-size: large">*调配次数</p>#}
+                                            <label >调配次数</label>
+                                            <br>
+
+                                             <select name="id_tempnum" id="id_tempnum" class="form-control">
+                                                <option value='一次'>一次</option>
+                                                <option value='单周'>单周</option>
+                                                <option value='双周'>双周</option>
+                                                <option value='每周'>每周</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group" style="width: 100%">
+{#                                            <p style="color: red;font-size: large">*调配信息</p>#}
+                                            <label >调配信息</label>
+                                                <textarea class="form-control" name="know" id="know" cols="30" rows="10" style="width: 100%;height: 80px"></textarea>
+                                        </div>
+                                            <p>注：1、一次临时借用，填写临时占用者和临时占用时间。 2、单周(双周/每周)，填写课程号和教师号。3、若调配信息为空，则将所选时间段的教室安排信息清除。</p>
+
+
+                                          <div class="form-group" style="width:100%;padding-left: 45%"  >
+                                                <button class="btn btn-primary btn-bloc"  style="padding-left:30px;padding-right: 30px" onclick="id_tem_submit1(this)">提交</button>
+                                            </div>
+
+									</div>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+                </div>
+            </div>
+   </div>
+
+
+
+
+    <script>
+    <!--需要添加教师号和课程号-->
+    function id_tem_submit1(obj){
+        {#$("#id_tem_submit1").click(function () {#}
+            $.ajax({
+                url: 'TempArrange.html',
+                type: 'post',
+                data: {
+                    {#'flag': 1,#}
+                     'camp1':$('#id_tempcamp').val(),
+                     'techno':$('#id_temptechno').val(),
+                     'courseno':$('#id_tempcourseno').val(),
+                     'tempclasstype':$('#id_tempclasstype').val(),
+                     'name':$('#id_tempname').val(),
+                     'type':$('#id_tempctype').val(),
+                     'week':$('#id_tempweek').val(),
+                      {##节数#}
+                     'classnum': $('#id_tempclassnum').val(),
+                     'num': $('#id_tempnum').val(),
+                     'back':$('#know').val(),
+                     'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        {#alert(2)#}
+                        location.href = 'TempArrange.html'
+                    } else {
+                        alert(data.msg)
+
+                    }
+                }
+            })
+        
+    }
+    </script>
+
+{% endblock %}

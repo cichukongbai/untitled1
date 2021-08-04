@@ -1,0 +1,150 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+ <style>
+    .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl{
+        padding-top: 14px;
+        padding-right: 4px;
+        padding-left: 0px;
+}
+    </style>
+   <div class="content-body">
+            <!-- row 控制位置-->
+            <div class="container-fluid">
+             <div class="a">
+{#                            <div class="form-group">#}
+{#                                <label for="id_camp" >校区:<br></label>#}
+{#                                <select name="camp" id="id_camp">#}
+{#                                    <option value='宝山'>宝山</option>#}
+{#                                    <option value='嘉定'>嘉定</option>#}
+{#                                    <option value='延长'>延长</option>#}
+{#                                    <option value='全部'>全部</option>#}
+{#                                </select>#}
+{##}
+{#                                <button  class="btn btn-sm btn-primary" id="id_add" >   提交</button>#}
+{#                            </div>#}
+
+
+
+					<!--排课结果显示原来的ArrangeRes.html-->
+					<div class="col-lg-12">
+						<div class="row tab-content">
+							<div id="list-view" class="tab-pane fade active show col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title" >未排课程
+{#                                            {% for palist in palist %}#}
+{#                                            {{ palist.School }}#}
+{#                                            {{ palist.SYear }}年#}
+{#                                            {{ palist.Semester }}学期#}
+{#                                            {{ palist.Campus }}校区课程浏览表#}
+{#                                            {% endfor %}#}
+                                        </h4>
+									</div>
+
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="example3" class="display" style="min-width: 845px">
+												<thead>
+													<tr>
+                                                        <th>序号</th>
+                                                        <th>课程编号</th>
+                                                        <th>课程名称</th>
+                                                        <th>教师号</th>
+                                                        <th>教师名称</th>
+                                                        <th>教室类别</th>
+                                                        <th>使用教室</th>
+                                                        <th>人数</th>
+                                                        <th>校区</th>
+
+													</tr>
+												</thead>
+
+
+												<tbody>
+                                                        {% for gg in gglist %}
+                                                            <tr>
+                                                                <td>{{ forloop.counter }}</td>
+                                                                <td>{{ gg.coID }}</td>
+                                                                <td>{{ gg.NAME }}</td>
+                                                                <td>{{ gg.TEACHNO }}</td>
+                                                                <td>{{ gg.TEACHNAME }}</td>
+                                                                <td>{{ gg.ROOM1 }}</td>
+                                                               <td>
+                                                                    {% if gg.NOTUSEROOM == '1' %}
+                                                                    否
+                                                                    {% elif gg.NOTUSEROOM == '0' %}
+                                                                      是
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>{{ gg.ENROLLS }}</td>
+                                                                <td>
+                                                                     {% if gg.campus_id == 0 %}
+                                                                        宝山
+                                                                    {% elif gg.campus_id == 1 %}
+                                                                        嘉定
+                                                                    {% elif gg.campus_id == 2 %}
+                                                                        延长
+                                                                    {% else  %}
+                                                                        其他
+                                                                    {% endif %}
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+
+                                                <!--手动添加 开始-->
+{#													<tr>#}
+{##}
+{#                                                        <td>3</td>#}
+{#                                                        <td>4</td>#}
+{#                                                        <td>5</td>#}
+{#                                                        <td>6</td>#}
+{#                                                        <td>7</td>#}
+{#                                                        <td>8</td>#}
+{#                                                        <td>9</td>#}
+{#                                                        <td>10</td>#}
+{#                                                        <td>否</td>#}
+{#                                                        <td>12</td>#}
+{#                                                        <td>13</td>#}
+{#                                                    </tr>#}
+
+                                                 <!--手动添加 结束-->
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+
+
+            </div>
+        </div>
+
+{#<script>#}
+{#        $("#id_add").click(function () {#}
+{#            $.ajax({#}
+{#                url: '/NotArrange/',#}
+{#                type: 'post',#}
+{#                data: {#}
+{#                    'id_camp': $('#id_camp').val(),#}
+{#                    'csrfmiddlewaretoken': '{{ csrf_token }}',#}
+{#                },#}
+{#                success: function (data) {#}
+{#                    if (data.status == 100) {#}
+{#                        location.href = '/NotArrange1/'#}
+{#                    } else {#}
+{#                        alert(data.msg)#}
+{#                        setTimeout(function () {#}
+{#                            $(".error").text("")#}
+{#                        }, 3000)#}
+{#                    }#}
+{#                }#}
+{#            })#}
+{#        })#}
+{#    </script>#}
+
+{% endblock %}

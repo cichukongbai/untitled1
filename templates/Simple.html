@@ -1,0 +1,435 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+{#    教室简表#}
+    <style>
+        .title2 {
+            text-align: center;
+        }
+
+        .main2 {
+
+            height: 200px;
+            margin: 30px auto;
+            background-color: #e4b9c0;
+            border: 2px solid;
+        }
+
+        .label2 {
+            margin: 20px 5px;
+        }
+    .table1{
+        margin:30px 50px;
+
+    }
+    .main1{
+        border: black 1px;
+    }
+    .form-control111{
+    background: #fff;
+    border: 1px solid #eaeaea;
+    color: #454545;
+}
+    .form-control111 {
+    {#display: block;#}
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.937rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #eaeaea;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+    </style>
+ <div class="content-body" >
+            <!-- row 控制位置-->
+            <div class="container-fluid" >
+				<div class="row" >
+					<div class="col-lg-12">
+						<div class="row tab-content" >
+							<div id="list-view" class="tab-pane fade active show col-lg-12" >
+
+                        <div class="form-group" style="padding-left: 0px" >
+                            <h2  >请选择教室简表输出的教室编号范围</h2>
+                        </div>
+
+
+                    <div class="form-group" >
+                             <label for="id_camp">校区</label>
+                                <select name="camp" id="id_camp"style="width: 20%">
+                                    <option value="全部">全部</option>
+                                    <option value='宝山'>宝山</option>
+                                    <option value='嘉定'>嘉定</option>
+                                    <option value='延长'>延长</option>
+                                </select>
+                                <label for="id_name" style="padding-left: 1%">查询范围:<br></label>
+                                    <input type="text" id="id21" style="width: 20%"class="form-control111">
+                                    <label for="id_name">至</label>
+                                    <input type="text" id="id22" style="width: 20%"class="form-control111">
+                                <button class="btn btn-sm btn-primary" onclick="id_submit1(this)" style="padding-left: 15px;padding-right: 15px">提交</button>
+                               <button  class="btn btn-sm btn-danger" onclick="id_submit2(this)" style="padding-left: 15px;padding-right: 15px" > 打印</button>
+
+{#                          <button  class="btn btn-sm btn-danger " id="id_reload3">重置</button>#}
+                    </div>
+
+      <div class="col-md-10">
+            <div style="text-align: center">
+{#                <h3>上海大学2020年冬季学期延长校区课程浏览表</h3>#}
+{#                <h3>{% for palist in palist %}#}
+{#                    {{ palist.School }}#}
+{#                    {{ palist.SYear }}年#}
+{#                    {{ palist.Semester }}学期#}
+{#                    {{ palist.Campus }}校区课程浏览表#}
+{#                    {% endfor %}#}
+{#                </h3>#}
+            </div>
+            <div class="table1">
+                <table border="1" cellspacing="0" width="90%" height="80" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <td rowspan="2">教室编号</td>
+
+                        <td colspan="6">星期一</td>
+                        <td colspan="6">星期二</td>
+                        <td colspan="6">星期三</td>
+                        <td colspan="6">星期四</td>
+                        <td colspan="6">星期五</td>
+                        <td colspan="6" style="color: red">星期六</td>
+                        <td colspan="6" style="color: red">星期日</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>11</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for gg in gglist %}
+                        <tr>
+                            <td>{{ gg.RoomID_id }}</td>
+
+                            <td>
+                                {% if gg.Mon1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Mon3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Mon5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Mon7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Mon9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Mon11_13 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Tue1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Tue3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Tue5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Tue7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Tue9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Tue11_13 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Wed1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Wed3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Wed5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Wed7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Wed9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Wed11_13 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Thu1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Thu3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Thu5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Thu7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Thu9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Thu11_13 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Fri1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Fri3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Fri5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Fri7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Fri9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Fri11_13 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sat1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sat3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sat5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sat7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sat9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sat11_13 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sun1_2 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sun3_4 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sun5_6 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sun7_8 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sun9_10 != None %}
+                                √
+                                {% endif %}
+                            </td><td>
+                                {% if gg.Sun11_13 != None %}
+                                √
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ </div>
+
+
+
+
+    <script>
+
+        $("#id_submit11").click(function () {
+            $.ajax({
+                url: 'Simple_1.html',
+                type: 'post',
+                data: {
+                    'sim_flag': 1,
+                    'sim_camp':$('#id_camp').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.status == 101) {
+                        {#alert(2)#}
+                        location.href = 'Simple1.html'
+                    } else {
+                        alert(data.msg)
+                        setTimeout(function () {
+                            $(".error").text("")
+                        }, 3000)
+                    }
+                }
+            })
+        })
+        function id_submit1(obj){
+
+        {#$("#id_submit1").click(function () {#}
+            $.ajax({
+
+                url: 'Simple_1.html',
+                type: 'post',
+                data: {
+                    'sim_flag': 2,
+                    'id21': $("#id21").val(),
+                    'id22': $("#id22").val(),
+                    'sim_camp':$('#id_camp').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.status == 101) {
+                        {#alert(2)#}
+                        location.href = 'Simple.html'
+
+                    }
+                }
+            })
+        }
+
+        function id_submit2(obj){
+
+        {#$("#id_submit1").click(function () {#}
+            $.ajax({
+
+                url: 'Simple_1.html',
+                type: 'post',
+                data: {
+                    'sim_flag': 2,
+                    'id21': $("#id21").val(),
+                    'id22': $("#id22").val(),
+                    'sim_camp':$('#id_camp').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    if (data.status == 101) {
+                        {#alert(2)#}
+                        location.href = 'Simple.html'
+
+                    }
+                }
+            })
+        }
+
+        {##}
+        {#$("#id_reload").click(function () {#}
+        {#    $.ajax(#}
+        {#        $('#id21').val("")#}
+        {#        $('#id22').val("")#}
+        {#)#}
+
+{#        #}
+
+        {##}
+        {#$('#id_reload2').click(function () {#}
+        {#    $.ajax(#}
+        {#        $('#id21').val("")#}
+        {#        $('#id22').val("")#}
+        {#    )#}
+
+
+        {#$('#id_reload3').click(function () {#}
+        {#    $.ajax(#}
+        {#        var ele=document.getElementsByName('classtype')#}
+        {#        ele.checked=false#}
+        {#    )#}
+
+
+    </script>
+{% endblock %}

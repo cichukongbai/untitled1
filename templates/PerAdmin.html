@@ -1,0 +1,200 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+    <style>
+        .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl {
+            padding-top: 15px;
+            padding-right: 0px;
+            padding-left: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 3rem;
+        }
+
+        .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto, .col-xxl-1, .col-xxl-2, .col-xxl-3, .col-xxl-4, .col-xxl-5, .col-xxl-6, .col-xxl-7, .col-xxl-8, .col-xxl-9, .col-xxl-10, .col-xxl-11, .col-xxl-12, .col-xxl, .col-xxl-auto {
+            position: relative;
+            width: 100%;
+            padding-right: 30px;
+            padding-left: 15px
+        }
+
+
+    </style>
+    <div class="content-body">
+        <!-- row 控制位置-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row tab-content">
+                        <div id="list-view" class="tab-pane fade active show col-lg-12">
+                            <div class="card" style="width: 100%">
+                                <div class="card-header">
+                                    <h4 class="card-title">用户信息表
+
+                                    </h4>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example3" class="display">
+                                            <thead>
+                                            <tr>
+                                                <th class="py-2">序号</th>
+                                                <th class="py-2">用户</th>
+                                                <th class="py-2">修改</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            {% for gg in gglist %}
+                                                <tr class="btn-reveal-trigger">
+                                                    <td class=" py-2">{{ gg.nid }}
+                                                    </td>
+                                                    <td class="py-2">{{ gg.username }}
+                                                    </td>
+                                                    <td>
+                                                        {#                                                             <button class="btn btn-sm btn-primary" data-toggle="modal"   data-target="#myModal" style="padding-left: 15px;padding-right: 15px" onclick="showDialog(this)">#}
+                                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                                style="padding-left: 15px;padding-right: 15px"
+                                                                onclick="showDialogPerAdmin(this)">
+                                                            修改
+                                                        </button>
+
+                                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                                             aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+
+
+                                                                        <h4 class="modal-title" id="myModalLabel"
+                                                                            align="left">
+                                                                            <input type="text" id="test"
+                                                                                   style="border-style:none;color:#000000;width: 200%; font-size: large;background: white"
+                                                                                   disabled="disabled">
+                                                                            <input type="hidden" id="nid">
+
+                                                                        </h4>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-hidden="true">
+                                                                            &times;
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form class="form-horizontal" role="form">
+                                                                            <div class="form-group">
+                                                                                {% for tt in ttlist %}
+
+                                                                                    <input type="checkbox" value="{{ tt.id }}" name="id_type" style="margin-right: 5px;">
+                                                                                    {{ tt.name }}
+
+                                                                                {% endfor %}
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal">
+                                                                            关闭
+                                                                        </button>
+                                                                        <!--PerAdmin1.html需要的数据，需要修改，-->
+                                                                        <a id="id_submit1" style="width: 70px"
+                                                                           class="btn btn-rounded btn-outline-primary"
+                                                                           onclick='changePermission(this)'>
+                                                                            提交
+                                                                        </a>
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal -->
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        function showDialogPerAdmin(obj) {
+            //点击更新按钮后展示模态框
+            $('#myModal').modal('show');
+            //获取当前行的所有列
+            var tds = $(obj).parent().parent().find('td');
+            //(".id"):通过class属性获取当前需要填写数据的输入框
+            //$(tds.eq(0)).text():通过下标取得对应列中的值
+            var id = tds.eq(0).text();
+            var b = tds.eq(1).text();
+            $("#test").val("修改权限用户名" + b);
+            $("#nid").val(id);
+        }
+
+
+        function changePermission(obj) {
+          var permissionList = $('input[name="id_type"]:checked');
+          var permissions = '';
+          $.each(permissionList, function (index, value, array) {
+            if (index+1 == permissionList.length) {  // 最后一位，不加逗号
+              permissions += permissionList[index].value;
+            } else {
+              permissions += permissionList[index].value + ', ';
+            }
+          });
+          $.ajax({
+            url: 'PerAdmin.html',
+            type: 'POST',
+            data: {
+              'id_no': $('#nid').val(),
+              permissions: permissions,
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+            },
+            success: function (data) {
+              if (data.status == 100) {
+                alert(data.msg);
+                location.href = 'PerAdmin.html';
+
+              } else if (data.status == 101) {
+                alert(data.msg);
+              }
+            },
+          })
+        }
+
+        {#$("#id_submit2").click(function () {#}
+            {#var name=JSON.stringify('{{ name.name }}')#}
+        {#    $.ajax({#}
+        {#        url: 'PerAdmin.html',#}
+        {#        type: 'post',#}
+        {#        data: {#}
+        {#            'id_no': $('#nid').val(),#}
+        {#            'id_type': $('input[type=radio][name=id_type]:checked').val(),#}
+        {#            'csrfmiddlewaretoken': '{{ csrf_token }}',#}
+        {#        },#}
+        {#        success: function (data) {#}
+        {#            if (data.status == 100) {#}
+        {#                alert(data.msg)#}
+        {#                location.href = 'PerAdmin.html'#}
+        {#            } else {#}
+        {#                alert(data.msg)#}
+        {#            }#}
+        {#        }#}
+        {#    })#}
+        {#})#}
+
+    </script>
+
+{% endblock %}

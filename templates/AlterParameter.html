@@ -1,0 +1,120 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+ <style>
+    .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl{
+        padding-top: 15px;
+        padding-right: 0px;
+        padding-left: 15px;
+}
+  .form-group {
+            margin-bottom: 3rem;
+        }
+        .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto, .col-xxl-1, .col-xxl-2, .col-xxl-3, .col-xxl-4, .col-xxl-5, .col-xxl-6, .col-xxl-7, .col-xxl-8, .col-xxl-9, .col-xxl-10, .col-xxl-11, .col-xxl-12, .col-xxl, .col-xxl-auto{
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px
+        }
+
+    </style>
+   <div class="content-body" >
+            <!-- row 控制位置-->
+            <div class="container-fluid" >
+				<div class="row" >
+					<div class="col-lg-12">
+						<div class="row tab-content" >
+							<div id="list-view" class="tab-pane fade active show col-lg-12" >
+								<div class="card" style="width: 100%;">
+									<div class="card-header">
+										<h4 class="card-title">参数设置
+
+                                        </h4>
+									</div>
+
+									<div class="card-body">
+                                        <div class="row">
+                                         <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group" style="width: 100% " >
+                                                 <label for="id_alterparaname">学校</label>
+                                                  <input type="text" id="id_alterparaname" class="form-control" placeholder={{ "上海大学" }}>
+                                             </div>
+                                         </div>
+
+										<div class="form-group" style="width: 50% ">
+												<label for="id_colle" class="form-label">校区</label>
+												<select type="text" class="form-control" id="id_colle">
+													<option>请选择</option>
+													<option value="0">宝山</option>
+                                                    <option value="2">延长</option>
+													<option value="1">嘉定</option>
+												</select>
+                                        </div>
+
+
+
+                                 <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group" style="width: 100% ">
+                                        <label for="id_year">年份</label>
+                                        <input type="text" id="id_year" class="form-control" placeholder={{ "2021" }}>
+                                    </div>
+                                 </div>
+
+                                   <div class="form-group" style="width: 50% ">
+                                       <label for="id_seame" class="form-label">学期</label>
+                                       <select type="text" class="form-control" id="id_seame">
+                                           <option>请选择</option>
+                                           <option value="春季">春季</option>
+                                           <option value="夏季">夏季</option>
+                                           <option value="秋季">秋季</option>
+                                           <option value="冬季">冬季</option>
+                                       </select>
+                                   </div>
+
+                                            <div class="form-group" style="width:100%;padding-left: 45%" >
+                                                <button class="btn btn-primary btn-bloc"  style="padding-left:30px;padding-right: 30px" onclick="id_alterparasubmit(this)">提交</button>
+                                            </div>
+
+                                        </div>
+									</div>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+
+            </div>
+        </div>
+
+   <script>
+
+function id_alterparasubmit(obj) {
+
+
+    {#$("#id_alterparasubmit").click(function () {#}
+        {#var name=JSON.stringify('{{ name.name }}')#}
+        $.ajax({
+            url: 'AlterParameter.html',
+            type: 'post',
+            data: {
+                'id_name1':$('#id_alterparaname').val(),
+                'id_colle':$('#id_colle').val(),
+                'id_year':$('#id_year').val(),
+                'id_seame':$('#id_seame').val(),
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+
+            },
+            success: function (data) {
+                if (data.status == 100) {
+                    alert(data.msg)
+                } else {
+                    alert(data.msg)
+
+                }
+            }
+        })
+    }
+
+   </script>
+
+{% endblock %}

@@ -1,0 +1,622 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+    {% csrf_token %}
+ <style>
+    .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl{
+        padding-top: 4px;
+        padding-right: 4px;
+        padding-left: 10px;
+}
+ .form-control111{
+    background: #fff;
+    border: 1px solid #eaeaea;
+    color: #454545;
+}
+    .form-control111 {
+    {#display: block;#}
+    width: 30%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.937rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #eaeaea;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+ </style>
+   <div class="content-body">
+            <!-- row 控制位置-->
+            <div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="nav nav-pills mb-3">
+							<!--<li class="nav-item"><a href="#list-view" data-toggle="tab" class="nav-link btn-primary mr-1 show active">List View</a></li>-->
+							<!--<li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid View</a></li>-->
+						</ul>
+					</div>
+					<div class="col-lg-12">
+						<div class="row tab-content">
+							<div id="list-view" class="tab-pane fade active show col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">
+{#                                            <form class="form-inline" role="form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">#}
+                                                <label for="myfile" ></label>
+                                                 教室信息录入：
+                                                <input class="file" type="file" id="myfile">
+{#                                                <a class="upload">上传</a>#}
+                                                <button class="btn btn-danger login1" onclick="id_up(this)">提交</button>
+{#                                            </form>#}
+                                              <a class="btn btn-primary"   data-toggle="modal" data-target="#queryByCap" >按教室容量范围查询</a>
+                                              <div class="modal fade" id="queryByCap" tabindex="-1" role="dialog" aria-labelledby="queryByCapLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="queryByCapLabel" align="left">
+                                                                               按教室容量范围查询
+                                                                            </h4>
+                                                                            <!--关闭按钮-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form class="form-horizontal" role="form">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group" >
+                                                                                            <label for="id_camp2">校区</label>
+                                                                                            <select name="camp" id="id_camp2">
+                                                                                            <option value='全部'>全部</option>
+                                                                                                {% for p in palist %}
+                                                                                                    <option value='{{ p.CampusId }}'>
+                                                                                                        {{ p.CampName }}</option>
+                                                                                                {% endfor %}
+
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div >
+
+                                                                                         <div class="form-group" style="padding-left: 15px">
+                                                                                             <label for="id_name" >容量</label>
+                                                                                             <br>
+                                                                                                    <input type="text" id="id21" class="form-control111">
+                                                                                                    <label for="id_name">至</label>
+                                                                                                    <input type="text" id="id22" class="form-control111">
+                                                                                                    <label for="id_name">之间</label>
+
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                关闭
+                                                                            </button>
+                                                                            <!--PerAdmin1.html需要的数据，需要修改，-->
+
+                                                                              <button style="width: 70px" class="btn btn-rounded btn-outline-primary"  type="button" onclick="id_submit2(this)">提交</button>
+                                                                               <!--<a  id="id_add_submit" class="btn btn-sm btn-primary" >
+                                                                                   提交
+                                                                               </a>-->
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal -->
+                                              </div>
+
+                                              <a class="btn btn-primary"   data-toggle="modal" data-target="#queryByCtype">按教室类型查询</a>
+                                              <div class="modal fade" id="queryByCtype" tabindex="-1" role="dialog" aria-labelledby="queryByCtypeLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="queryByCtypeLabel" align="left">
+                                                                               按教室类型查询
+                                                                            </h4>
+                                                                            <!--关闭按钮-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form class="form-horizontal" role="form">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                           <div class="form-group">
+                                                                                                <label for="id_camp3">校区</label>
+                                                                                                <select name="camp" id="id_camp3">
+                                                                                                    <option value='全部'>全部</option>
+                                                                                                {% for p in palist %}
+                                                                                                    <option value='{{ p.CampusId }}'>
+                                                                                                        {{ p.CampName }}</option>
+                                                                                                {% endfor %}
+                                                                                                </select>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                            <label for="id_name" >教室类型</label>
+                                                                                            <label>
+                                                                                                {% for l in lllist %}
+                                                                                                    <input type="radio" name="classtype" value="{{ l.TypeId }}" >{{ l.TypeName }}
+                                                                                                    {% endfor %}
+                                                                                            </label>
+                                                                                         </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                关闭
+                                                                            </button>
+                                                                            <!--PerAdmin1.html需要的数据，需要修改，-->
+                                                                              <button  style="width: 70px" class="btn btn-rounded btn-outline-primary"  onclick="id_submit3(this)">提交</button>
+                                                                               <!--<a  id="id_add_submit" class="btn btn-sm btn-primary" >
+                                                                                   提交
+                                                                               </a>-->
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal -->
+                                              </div>
+
+                                        </h4>
+                                      <!--添加模态框-->
+
+
+                                        <a class="btn btn-primary"   data-toggle="modal" data-target="#addClassModal">+ 添加</a>
+                                        <div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="addClassModalLabel" align="left">
+                                                                               添加教室
+                                                                            </h4>
+                                                                            <!--关闭按钮-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form class="form-horizontal" role="form">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_room">教室编号</label>
+                                                                                            <input type="text" id="id_room" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                            <label for="id_name">教室名称</label>
+                                                                                            <input type="text" id="id_name" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                            <label for="id_enroll">教室容量</label>
+                                                                                            <input type="text" id="id_enroll" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                                <label for="id_total">考试人数</label>
+                                                                                                <input type="text" id="id_total" class="form-control">
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_type">教室类型</label>
+                                                                                            <select name="ctype" id="id_ctype">
+                                                                                                {% for l in lllist %}
+                                                                                                    <option value='{{ l.TypeId }}'>
+                                                                                                        {{ l.TypeName }}</option>
+                                                                                                {% endfor %}
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+
+
+
+                                                                                     <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                                <label for="id_use" >是否可用</label>
+
+                                                                                                 <select name="use" id="id_use">
+                                                                                                        <option value='是'>是</option>
+                                                                                                        <option value='否'>否</option>
+                                                                                                 </select>
+                                                                                            </div>
+                                                                                     </div>
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                                <label for="id_addcamp" >校区</label>
+
+                                                                                                 <select name="camp" id="id_addcamp">
+
+                                                                                                {% for p in palist %}
+                                                                                                    <option value='{{ p.CampusId }}'>
+                                                                                                        {{ p.CampName }}</option>
+                                                                                                {% endfor %}
+                                                                                                 </select>
+                                                                                            </div>
+                                                                                     </div>
+
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                关闭
+                                                                            </button>
+                                                                            <!--PerAdmin1.html需要的数据，需要修改，-->
+                                                                              <button style="width: 70px" class="btn btn-rounded btn-outline-primary"  onclick="id_addroom(this)" >提交</button>
+                                                                               <!--<a  id="id_add_submit" class="btn btn-sm btn-primary" >
+                                                                                   提交
+                                                                               </a>-->
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal -->
+                                              </div>
+
+
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="example3" class="display" style="min-width: 845px">
+												<thead>
+													<tr>
+                                                        <th>教室编号</th>
+                                                        <th>教室名称</th>
+                                                        <th>教室容量</th>
+                                                        <th>教室类型</th>
+                                                        <th>考试人数</th>
+                                                        <th>是否可用</th>
+                                                        <th>校区</th>
+                                                        <th>操作</th>
+													</tr>
+												</thead>
+
+                                                <tbody>
+                                                 {% for gg in gglist %}
+                                                    <tr>
+                                                       <td>{{ gg.cid }}</td>
+                                                        <td>{{ gg.cname }}</td>
+                                                        <td>{{ gg.capacity }}</td>
+                                                        <td>
+                                                            {% if gg.ctype_id == 1 %}
+                                                                多媒体
+                                                            {% elif gg.ctype_id == 2 %}
+                                                                语音室
+                                                            {% elif gg.ctype_id == 3 %}
+                                                                普通教室
+                                                            {% endif %}
+
+                                                        </td>
+                                                        <td>{{ gg.cnum }}</td>
+                                                       <td>
+                                                            {% if gg.cuse == '1' %}
+                                                                是
+                                                            {% elif gg.cuse == '0' %}
+                                                                否
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            {% if gg.campus_id == 0 %}
+                                                                宝山
+                                                            {% elif gg.campus_id == 1 %}
+                                                                嘉定
+                                                            {% elif gg.campus_id == 2 %}
+                                                                延长
+                                                            {% else  %}
+                                                                其他
+                                                            {% endif %}
+
+                                                        </td>
+                                                        <td>
+
+
+{#                                                            <a  class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addClassModal"  ><img src="/static/bootstrap/edit.svg"  width="20" alt="" />修改</a>#}
+                                                            <a  class="btn btn-sm btn-primary" data-toggle="modal"  onclick="showDialogRoom(this)"><img src="/static/bootstrap/edit.svg"  width="20" alt="" />修改</a>
+
+                                                            <a   class="btn btn-sm btn-danger" onclick="del(this)" > <img src="/static/bootstrap/del.svg"  width="20" alt=""/>
+
+                                                                删除</a>
+
+                                                             <div class="modal fade" id="alterMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="myModalLabel" align="left" >
+
+                                                                            </h4>
+                                                                            <input type="text"  id="title" style="border-style:none;color:black;width: 200%;font-size: large;background: white" disabled ="disabled"    >
+
+                                                                            <input type="hidden" id="id_alterroom"  >
+                                                                            <!--关闭按钮-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form class="form-horizontal" role="form">
+
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                        <label for="id_altername">教室名称</label>
+                                                                                        <input οnkeyup="value=value.replace(/[^\w\.\/]/ig,'')" type="text" id="id_altername" class="form-control" >
+                                                                                       </div>
+                                                                                    </div>
+                                                                                      <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                                <label for="id_alterenroll">教室容量</label>
+                                                                                                <input type="text" id="id_alterenroll" class="form-control"  >
+                                                                                         </div>
+                                                                                      </div>
+
+
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                          <div class="form-group">
+                                                                                            <label for="id_altertype">教室类型</label>
+                                                                                            <select name="ctype" id="id_alterctype"
+                                                                                                    {% for l in lllist %}
+                                                                                                        <option value="{{ l.TypeId }}">{{ l.TypeName }}</option>
+                                                                                                    {% endfor %}
+
+
+                                                                                            </select>
+                                                                                          </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_altertotal">考试人数</label>
+                                                                                            <input type="text" id="id_altertotal" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                         <div class="form-group">
+                                                                                             <label for="id_alteruse" >是否可用</label>
+
+                                                                                                 <select name="camp" id="id_alteruse">
+                                                                                                        <option value='是'>是</option>
+                                                                                                        <option value='否'>否</option>
+                                                                                                 </select>
+                                                                                         </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                关闭
+                                                                            </button>
+                                                                            <!--PerAdmin1.html需要的数据，需要修改，-->
+                                                                               <a  id="id_alter" style="width: 70px" class="btn btn-rounded btn-outline-primary" onclick='alter(this)' >
+                                                                                   提交
+                                                                               </a>
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal -->
+                                                            </div>
+
+
+                                                        </td>
+                                                        <!--<td>
+                                                            <a id="abc" class="btn btn-sm btn-primary" href="AlterClass3.html?name={{ forloop.counter }}">修改111</a>
+
+                                                            <a id="abc" id="id_submit" class="btn btn-sm btn-danger" href="ClassView1.html?name={{ gg.NAME }}">删除</a>
+                                                        </td>-->
+                                                    </tr>
+                                                  {% endfor %}
+
+
+												</tbody>
+
+											</table>
+										</div>
+									</div>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+
+            </div>
+        </div>
+
+    <script >
+
+        function showDialogRoom(obj){
+            //点击更新按钮后展示模态框
+             $('#alterMyModal').modal('show');
+             //获取当前行的所有列
+             var tds= $(obj).parent().parent().find('td');
+             //(".id"):通过class属性获取当前需要填写数据的输入框
+             //$(tds.eq(0)).text():通过下标取得对应列中的值
+             var alterroom = tds.eq(0).text();
+             var altername = tds.eq(1).text();
+             var alterenroll = tds.eq(2).text();
+             var altertotal = tds.eq(4).text();
+             var campus = tds.eq(6).text();
+             var con;
+
+             $("#title").val("教室编号"+alterroom);
+             $("#id_alterroom").val(alterroom);
+             $("#id_altername").val(altername);
+             $("#id_alterenroll").val(alterenroll);
+             $("#id_altertotal").val(altertotal);
+
+}
+
+function alter(obj)
+     {
+         $.ajax({
+                url: 'AlterRoom1.html',
+                type: 'post',
+                data: {
+                    'id_room': $("#id_alterroom").val(),
+                    'id_name': $("#id_altername").val(),
+                    'id_enroll': $("#id_alterenroll").val(),
+                    'id_type': $('#id_alterctype').val(),
+                    'id_total': $("#id_altertotal").val(),
+                    'id_use': $('#id_alteruse').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        alert('更新成功')
+                        location.href = 'Room.html'
+                    } else {
+                        alert(data.msg)
+                        setTimeout(function () {
+                            $(".error").text("")
+                        }, 3000)
+                    }
+                }
+            })
+     }
+
+{#删除教室#}
+function del(obj)
+{
+    var tds= $(obj).parent().parent().find('td');
+    var id_delroom = tds.eq(0).text();
+    var con;
+    con = confirm('确定要删除'+id_delroom+'教室吗？')
+        if (con == true) {
+
+            $.ajax({
+                url: 'DelRoom.html',
+                type: 'post',
+                data: {
+                    'id_room': id_delroom,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        alert('删除成功')
+                        location.href = 'Room.html'
+                    } else {
+                        alert(data.msg)
+                        setTimeout(function () {
+                            $(".error").text("")
+                        }, 3000)
+                    }
+                }
+            })
+            }
+     }
+  {#添加教室#}
+  function id_addroom(obj) {
+            $.ajax({
+                url: 'AddRoom.html',
+                type: 'post',
+                data: {
+                    'id_room': $("#id_room").val(),
+                    'id_name': $("#id_name").val(),
+                    'id_enroll': $("#id_enroll").val(),
+                    'id_type': $('#id_ctype').val(),
+                    'id_camp': $('#id_addcamp').val(),
+                    'id_total': $("#id_total").val(),
+                    'id_use': $('#id_use').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        alert(data.msg)
+                        location.href = 'Room.html'
+                    } else {
+                        alert(data.msg)
+                        setTimeout(function () {
+                            $(".error").text("")
+                        }, 3000)
+                    }
+                }
+            })
+  }
+
+ {#按类型查询#}
+ function id_submit3(obj) {
+        $.ajax({
+            url: 'RoomSelect1.html',
+            type: 'post',
+            data: {
+                'cat_id': $('input[type=radio][name=classtype]:checked').val(),
+                'id_camp': $("#id_camp3").val(),
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (data) {
+                if (data.status == 101) {
+                    alert('查询成功！')
+                    location.href = 'RoomSelect1Redict.html'
+                } else {
+                    alert(data.msg)
+                    setTimeout(function () {
+                        $(".error").text("")
+                    }, 3000)
+                }
+            }
+        })
+    }
+
+ {#按容量查询#}
+ function id_submit2(obj) {
+
+        $.ajax({
+            url: 'RoomSelect2.html',
+            type: 'post',
+            data: {
+                'id_camp': $("#id_camp2").val(),
+                'id21': $("#id21").val(),
+                'id22': $("#id22").val(),
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (data) {
+                if (data.status == 101) {
+                    {#alert('查询成功！')#}
+                    location.href = 'RoomSelect2Redict.html'
+                } else {
+                    alert(data.msg)
+                    setTimeout(function () {
+                        $(".error").text("")
+                    }, 3000)
+                }
+            }
+        })
+    }
+    function id_up(obj) {
+        var myfile = document.getElementById('myfile').files[0]
+        var formdata = new FormData()
+        formdata.append('myfile', myfile)
+
+        $.ajax({
+            url: 'UploadRoom.html',
+            type: 'post',
+            processData: false,     //不再处理数据，默认为True
+            contentType: false,     //不再指定编码
+            data:formdata,
+
+            success: function (data) {
+                if (data.status == 100) {
+                    $("#error").text("")
+                    location.href = 'Room.html'
+                } else {
+                    alert(data.msg)
+
+                }
+            }
+        })
+    }
+    </script>
+{% endblock %}

@@ -1,0 +1,440 @@
+{% extends 'index-32.html' %}
+{% block diy %}
+     <style>
+    .table1{
+        margin:30px 10px;
+
+    }
+    .main1{
+        border: black 1px;
+    }
+    </style>
+
+{#                    <div class="col-lg-6 col-md-6 col-sm-12">#}
+{#                        <div class="form-group" >#}
+{#                            <h2 class="title2" style="margin: 20px">教室总表输出的顺序类型</h2>#}
+{#                        </div>#}
+{#                    </div>#}
+
+     <div class="content-body" >
+            <!-- row 控制位置-->
+            <div class="container-fluid" >
+				<div class="row" >
+					<div class="col-lg-12">
+						<div class="row tab-content" >
+							<div id="list-view" class="tab-pane fade active show col-lg-12" >
+                      <div class="form-group" >
+
+                             <label for="id_camp">校区</label>
+                                <select name="camp" id="id_camp">
+                                    <option>请选择</option>
+                                    {% for l in lllist %}
+                                        <option value='{{ l.CampusId }}'>{{ l.CampName }}</option>
+                                    {% endfor %}
+
+
+                                </select>
+
+                                <label for="id_type" >按教室类型查询:<br></label>
+                                <select name="atype" id="id_type">
+                                    {% for c in cclist %}
+                                        <option value='{{ c.TypeId }}'>{{c.TypeName  }}</option>
+                                    {% endfor %}
+
+
+                                </select>
+                          <button  class="btn btn-sm btn-primary" onclick="id_submit3(this)" style="padding-left: 15px;padding-right: 15px" >   提交</button>
+                          <button  class="btn btn-sm btn-danger" onclick="id_submit4(this)" style="padding-left: 15px;padding-right: 15px" >   打印</button>
+
+{#                          <button  class="btn btn-sm btn-danger " id="id_reload3">重置</button>#}
+                      </div>
+    {#            按类型查询#}
+
+
+    </div>
+
+    <div>
+            <div style="text-align: center">
+            </div>
+            <div class="table1">
+                <table border="1" cellspacing="0" width="90%" height="80" style="text-align: center">
+                    <thead>
+                    <tr>
+                        <td rowspan="2">教室名称</td>
+                        <td rowspan="2">容量</td>
+{#                        <td rowspan="2">类型</td>#}
+                        <td colspan="6">星期一 单/双</td>
+                        <td colspan="6">星期二 单/双</td>
+                        <td colspan="6">星期三 单/双</td>
+                        <td colspan="6">星期四 单/双</td>
+                        <td colspan="6">星期五 单/双</td>
+                        <td colspan="6" style="color: red">星期六 单/双</td>
+                        <td colspan="6" style="color: red">星期日 单/双</td>
+                    </tr>
+                    <tr>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                        <td>1-2</td>
+                        <td>3-4</td>
+                        <td>5-6</td>
+                        <td>7-8</td>
+                        <td>9-10</td>
+                        <td>11-13</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for gg in gglist %}
+                        <tr>
+                            <td>{{ gg.RoomID_id }}</td>
+                            <td>{{ gg.Enroll }}</td>
+                            <td>
+                                {% if gg.Mon1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Mon1_2 }}
+                            {% endif %}
+
+                            </td>
+                            <td>
+                                {% if gg.Mon3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Mon3_4}}
+                            {% endif %}
+
+                            </td><td>
+                                {% if gg.Mon5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Mon5_6}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Mon7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Mon7_8}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Mon9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Mon9_10}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Mon11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Mon11_13}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Tue1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Tue1_2}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Tue3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Tue3_4}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Tue5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Tue5_6}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Tue7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Tue7_8}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Tue9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Tue9_10}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Tue11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Tue11_13}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Wed1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Wed1_2 }}
+                            {% endif %}
+
+                            </td>
+                            <td>
+                                {% if gg.Wed3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Wed3_4}}
+                            {% endif %}
+
+                            </td><td>
+                                {% if gg.Wed5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Wed5_6}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Wed7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Wed7_8}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Wed9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Wed9_10}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Wed11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Wed11_13}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Thu1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Thu1_2}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Thu3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Thu3_4}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Thu5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Thu5_6}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Thu7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Thu7_8}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Thu9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Thu9_10}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Thu11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Thu11_13}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Fri1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Fri1_2 }}
+                            {% endif %}
+
+                            </td>
+                            <td>
+                                {% if gg.Fri3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Fri3_4}}
+                            {% endif %}
+
+                            </td><td>
+                                {% if gg.Fri5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Fri5_6}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Fri7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Fri7_8}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Fri9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Fri9_10}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Fri11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Fri11_13}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Sat1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sat1_2}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Sat3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sat3_4}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Sat5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sat5_6}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Sat7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sat7_8}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Sat9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sat9_10}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Sat11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sat11_13}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Sun1_2 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sun1_2}}
+                            {% endif %}
+                            </td><td>
+                                {% if gg.Sun3_4 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sun3_4}}
+                            {% endif %}
+                            </td><td>
+                               {% if gg.Sun5_6 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sun5_6}}
+                            {% endif %}
+                            </td><td>
+                              {% if gg.Sun7_8 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sun7_8}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Sun9_10 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sun9_10}}
+                            {% endif %}
+                            </td><td>
+                             {% if gg.Sun11_13 == None %}
+{#                                <input type="checkbox" value={{ gg.coID }} name="notuse" checked>#}
+                            {% else %}
+                                    {{ gg.Sun11_13}}
+                            {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </div>
+
+
+    <script>
+    function id_submit3(obj) {
+        {#$("#id_submit3").click(function () {#}
+        $.ajax({
+            url: 'Summary.html',
+            type: 'post',
+            data: {
+                'flag': 1,
+                'id_camp': $('#id_camp').val(),
+                'id_type': $('#id_type').val(),
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (data) {
+                alert('查询完毕')
+                location.href = 'Summary.html'
+            }
+        })
+
+    }
+        function id_submit4(obj) {
+            {#$("#id_submit4").click(function () {#}
+            $.ajax({
+                url: 'Summary.html',
+                type: 'post',
+                data: {
+                    'flag': 2,
+                    'id_camp': $('#id_camp').val(),
+                    'id_type': $('#id_type').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    alert('打印完毕')
+                    location.href = 'Summary.html'
+                }
+            })
+        }
+
+
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,510 @@
+﻿{% extends 'index-32.html' %}
+{% block diy %}
+ <style>
+    .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl{
+        padding-top: 0px;
+        padding-right: 4px;
+        padding-left: 15px;
+}
+    </style>
+   <div class="content-body">
+            <!-- row 控制位置-->
+            <div class="container-fluid">
+
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="nav nav-pills mb-3">
+							<!--<li class="nav-item"><a href="#list-view" data-toggle="tab" class="nav-link btn-primary mr-1 show active">List View</a></li>-->
+							<!--<li class="nav-item"><a href="#grid-view" data-toggle="tab" class="nav-link btn-primary">Grid View</a></li>-->
+						</ul>
+					</div>
+					<div class="col-lg-12">
+						<div class="row tab-content">
+							<div id="list-view" class="tab-pane fade active show col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">
+{#                                            上海大学2021年春季学期延长校区课程浏览表#}
+                                            {% for palist in palist %}
+                                            {{ palist.School }}
+                                            {{ palist.SYear }}年
+                                            {{ palist.Semester }}学期
+                                                {% if gg.campus_id == 0 %}
+                                                    宝山
+                                                {% elif gg.campus_id == 1 %}
+                                                    嘉定
+                                                {% elif gg.campus_id == 2 %}
+                                                    延长
+                                                {% else  %}
+                                                    其他
+                                                {% endif %}
+                                           校区课程浏览表
+                                            {% endfor %}
+                                             <label for="myfile1" ></label>
+                                                 课程信息录入：
+                                                <input class="file" type="file" id="myfile1">
+{#                                                <a class="upload">上传</a>#}
+                                                <button class="btn btn-danger login1" onclick="id_up(this)">提交</button>
+                                        </h4>
+
+
+                                        <!--添加模态框-->
+										<a class="btn btn-primary"  data-toggle="modal" data-target="#addClassModal">+ 添加</a>
+                                              <div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="addClassModalLabel" align="left">
+                                                                               添加课程
+                                                                            </h4>
+                                                                            <!--关闭按钮-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form class="form-horizontal" role="form">
+
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group" >
+                                                                                            <label for="id_addind"> 课程编号</label>
+                                                                                            <input type="text" id="id_addind" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_addname" class="form-label">课程名称</label>
+                                                                                            <input type="text" id="id_addname" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_addsco">学分</label>
+                                                                                            <input type="text" id="id_addsco" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_addenr">容量</label>
+                                                                                            <input type="text" id="id_addenr" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_addnum">人数</label>
+                                                                                            <input type="text" id="id_addnum" class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                     <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="id_addtype" class="form-label">教室类别</label>
+                                                                                                    <select name="addtype" id="id_addtype" type="text" class="form-control" >
+                                                                                                        {% for l in lllist %}
+                                                                                                            <option value="{{ l.TypeId }}">{{ l.TypeName }}</option>
+                                                                                                        {% endfor %}
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                     </div>
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                                 <div class="form-group">
+                                                                                                   <label for="id_addcamp1">校区</label>
+                                                                                                        <select name="camp" id="id_addcamp1">
+                                                                                                            <option value='全部'>全部</option>
+                                                                                                            {% for c in cclist %}
+                                                                                                                <option value='{{ c.CampusId }}'>{{ c.CampName }}</option>
+                                                                                                            {% endfor %}
+                                                                                                        </select>
+                                                                                                </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="****" class="form-label">备用2</label>
+                                                                                            <input type="text" id="****" class="form-control"  >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="****" class="form-label">备用3</label>
+                                                                                            <input type="text" id="****" class="form-control"  >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="****" class="form-label">备用4</label>
+                                                                                            <input type="text" id="****" class="form-control"  >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_adduse">是否用教室</label>
+                                                                                                 <select name="adduse" id="id_adduse" type="text" class="form-control" >
+                                                                                                        <option value="是">是</option>
+                                                                                                         <option value="否">否</option>
+                                                                                                    </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                关闭
+                                                                            </button>
+                                                                            <!--PerAdmin1.html需要的数据，需要修改，-->
+{#                                                                                <a   class="btn btn-rounded btn-outline-primary"style="width: 70px" id="id_addclass1"  >#}
+
+                                                                               <a   class="btn btn-rounded btn-outline-primary"style="width: 70px"  onclick='id_addclass1(this)' >
+                                                                                   提交
+                                                                               </a>
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal -->
+                                                            </div>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="example3" class="display" style="min-width: 845px">
+												<thead>
+													<tr>
+                                                        <th>序号</th>
+                                                        <th>课程编号</th>
+                                                        <th>课程名称</th>
+                                                        <th>教师号</th>
+                                                        <th>教师名称</th>
+                                                        <th>学分</th>
+                                                        <th>容量</th>
+                                                        <th>人数</th>
+                                                        <th>上课时间</th>
+                                                        <th>使用教室</th>
+                                                        <th>教室类别</th>
+                                                        <th>校区</th>
+                                                        <th>排课</th>
+                                                        <th >操作</th>
+													</tr>
+												</thead>
+
+                                                <tbody>
+                                                 {% for gg in gglist %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td>{{ gg.coID }}</td>
+                                                        <td>{{ gg.NAME }}</td>
+                                                        <td>{{ gg.TEACHNO }}</td>
+                                                        <td>{{ gg.TEACHNAME }}</td>
+                                                        <td>{{ gg.CREDIT }}</td>
+                                                        <td>{{ gg.ENROLLS }}</td>
+                                                        <td>{{ gg.TOTALS }}</td>
+                                                        <td>{{ gg.TIMETEXT }}</td>
+                                                        <td>
+                                                            {% if gg.NOTUSEROOM == 'FALSE' %}
+                                                                否
+                                                            {% else  %}
+                                                               是
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>{{ gg.ROOM1 }}</td>
+                                                        <td>
+                                                            {% if gg.campus_id == 0 %}
+                                                                宝山
+                                                            {% elif gg.campus_id == 1 %}
+                                                                嘉定
+                                                            {% elif gg.campus_id == 2 %}
+                                                                延长
+                                                            {% else  %}
+                                                                其他
+                                                            {% endif %}
+                                                        </td>
+                                                        <!--是否排课-->
+                                                        <td>
+                                                            {% if gg.flag == '0' %}
+                                                              否
+                                                            {% elif gg.flag == '1' %}
+                                                                是
+                                                            {% endif %}
+
+                                                        </td>
+                                                        <td>
+                                                            <!--  修改和删除   -->
+
+                                                             <a  class="btn btn-sm btn-primary" data-toggle="modal"  onclick="showDialogClass(this)"><img src="/static/bootstrap/edit.svg"  width="20" alt=""/></a>
+                                                            <a  class="btn btn-sm btn-danger" onclick="del(this)"><img src="/static/bootstrap/del.svg"  width="20" alt=""/></a>
+
+                                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title" id="myModalLabel" align="left">
+
+                                                                            </h4>
+                                                                             <input type="text"  id="title" style="border-style:none;color:black;width: 200%;font-size: large;background: white" disabled ="disabled"    >
+                                                                            <input type="hidden" id="id_ind"  >
+                                                                            <!--关闭按钮-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                &times;
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form class="form-horizontal" role="form">
+
+                                                                                <div class="row">
+{#                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">#}
+{#                                                                                        <div class="form-group" >#}
+{#                                                                                            <label for="id_ind"> 课程编号</label>#}
+{#                                                                                            <input type="text" id="id_ind" class="form-control" >#}
+{#                                                                                        </div>#}
+{#                                                                                    </div>#}
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_name" class="form-label">课程名称</label>
+                                                                                            <input type="text" id="id_name" class="form-control"  >
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_sco">学分</label>
+                                                                                            <input type="text" id="id_sco" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_enr">容量</label>
+                                                                                            <input type="text" id="id_enr" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_num">人数</label>
+                                                                                            <input type="text" id="id_num" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="id_type" class="form-label">教室类别</label>
+                                                                                                    <select name="ctype" id="id_type" type="text" class="form-control" >
+                                                                                                        {% for l in lllist %}
+                                                                                                            <option value="{{ l.TypeId }}">
+                                                                                                                {{ l.TypeName }}</option>
+                                                                                                        {% endfor %}
+
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                     </div>
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_num">教师工号</label>
+                                                                                            <input type="text" id="id_tea" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_num">教师名称</label>
+                                                                                            <input type="text" id="id_teaname" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <label for="id_use">是否用教室</label>
+                                                                                                    <select name="cuse" id="id_use" type="text" class="form-control" >
+                                                                                                        <option value="是">是</option>
+                                                                                                         <option value="否">否</option>
+                                                                                                    </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                                                关闭
+                                                                            </button>
+                                                                            <!--PerAdmin1.html需要的数据，需要修改，-->
+                                                                               <a  id="id_submit" style="width: 70px" class="btn btn-rounded btn-outline-primary" onclick='alter(this)' >
+                                                                                   提交
+                                                                               </a>
+                                                                        </div>
+                                                                    </div><!-- /.modal-content -->
+                                                                </div><!-- /.modal -->
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+                                                  {% endfor %}
+
+												</tbody>
+
+											</table>
+										</div>
+									</div>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+
+            </div>
+        </div>
+
+   <script>
+{#   修改#}
+   function showDialogClass(obj){
+	//点击更新按钮后展示模态框
+	 $('#myModal').modal('show');
+	 //获取当前行的所有列
+	 var tds= $(obj).parent().parent().find('td');
+	 //(".id"):通过class属性获取当前需要填写数据的输入框
+	 //$(tds.eq(0)).text():通过下标取得对应列中的值
+     {#var alterroom = tds.eq(0).text();#}
+     var id_ind1 = tds.eq(1).text();
+     var id_name1 = tds.eq(2).text();
+     var id_sco1 = tds.eq(5).text();
+     var id_enr1 = tds.eq(6).text();
+     var id_num1 = tds.eq(7).text();
+     var beiyong1 = tds.eq(6).text();
+     var beiyong2 = tds.eq(6).text();
+     var beiyong3 = tds.eq(6).text();
+     var beiyong4 = tds.eq(6).text();
+     {#alert(id_ind)#}
+
+     $("#title").val("修改课程"+id_ind1);
+     $("#id_ind").val(id_ind1);
+     $("#id_name").val(id_name1);
+     $("#id_sco").val(id_sco1);
+     $("#id_enr").val(id_enr1);
+     $("#id_num").val(id_num1);
+     {#备用信息未添加#}
+
+}
+{#删除课程#}
+function del(obj)
+{
+    var tds= $(obj).parent().parent().find('td');
+    var coID = tds.eq(1).text();
+     var con;
+        con = confirm('确定要删除'+coID+'课程吗？')
+        if (con == true) {
+
+            $.ajax({
+                url: 'DelClass.html',
+                type: 'post',
+                data: {
+                    'coID': coID,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                         alert(data.msg)
+                        location.href = 'ClassView1.html'
+                    } else {
+                        alert(data.msg)
+                        setTimeout(function () {
+                            $(".error").text("")
+                        }, 3000)
+                    }
+                }
+            })
+            }
+}
+
+
+
+
+function alter(obj)
+     {
+         $.ajax({
+                url: 'AlterClass.html',
+                type: 'post',
+                data: {
+                    'id_ind': $("#id_addind").val(),
+                    'id_name': $("#id_name").val(),
+                    'id_sco': $("#id_sco").val(),
+                    'id_tea': $("#id_tea").val(),
+                    'id_type': $("#id_type").val(),
+                    'id_teaname': $("#id_teaname").val(),
+                    'id_enr': $('#id_enr').val(),
+                    'id_num': $("#id_num").val(),
+                    'id_use': $("#id_use").val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        alert(data.msg)
+                        location.href = 'ClassView1.html'
+                    } else {
+                        alert(data.msg)
+
+                    }
+                }
+            })
+     }
+   {#添加课程#}
+   function id_addclass1(obj)
+   {
+      $.ajax({
+                url: 'AddClass.html',
+                type: 'post',
+                data: {
+                    'id_addind': $("#id_addind").val(),
+                    'id_addname': $("#id_addname").val(),
+                    'id_addsco': $("#id_addsco").val(),
+                    'id_addenr': $('#id_addenr').val(),
+                    'id_addnum': $('#id_addnum').val(),
+                    'id_adduse': $("#id_adduse").val(),
+                    'id_addtype': $('#id_addtype').val(),
+                    'id_addcamp1': $('#id_addcamp1').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        alert(data.msg)
+                        location.href = 'ClassView1.html'
+                    } else {
+                        alert(data.msg)
+                        setTimeout(function () {
+                            $(".error").text("")
+                        }, 3000)
+                    }
+                }
+            })
+   }
+{#  上传文件#}
+function id_up(obj) {
+        var myfile = document.getElementById('myfile1').files[0]
+        var formdata = new FormData()
+        formdata.append('myfile', myfile)
+
+        $.ajax({
+            url: 'UploadCourse.html',
+            type: 'post',
+            processData: false,     //不再处理数据，默认为True
+            contentType: false,     //不再指定编码
+            data:formdata,
+
+            success: function (data) {
+                if (data.status == 100) {
+                    alert(data.msg)
+                    location.href = 'ClassView1.html'
+                } else {
+                    alert(data.msg)
+
+                }
+            }
+        })
+    }
+
+
+
+        </script>
+
+{% endblock %}
+
