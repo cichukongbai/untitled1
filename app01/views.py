@@ -368,8 +368,8 @@ def Simple_1(request):
         sim_camp = request.POST.get('sim_camp')
         print('Simple_1  sim_flag sim_camp',sim_flag,sim_camp)
 
-        request.session['sim_flag'] = sim_flag
-        request.session['sim_camp'] = sim_camp
+        # request.session['sim_flag'] = sim_flag
+        # request.session['sim_camp'] = sim_camp
         response_dic = {'status': 101, 'msg': None}
         if sim_flag == '2':
             response_dic = {'status': 101, 'msg': None}
@@ -386,8 +386,178 @@ def Simple_1(request):
 
 @login_required(login_url='/login.html')
 def Simple(request):
-    gg_list = models.Arrangement.objects.all()
-    return render(request, 'Simple.html', {'gglist': gg_list})
+    if request.method == 'GET':
+        ll_list=models.Campus.objects.all()
+        cc_list=models.ClassroomType.objects.all()
+        gg_list = models.Arrangement.objects.all()
+        return render(request, 'Simple.html', {'gglist': gg_list,'lllist': ll_list,'cclist': cc_list})
+    else:
+        flag=int(request.POST.get('flag'))
+        print(flag)
+        camp = request.POST.get('camp')
+
+        # 查询
+        # if flag==1:
+        #     print("Summary type  camp", type, camp)
+            # request.session['flag'] = flag
+            # request.session['camp'] = camp
+            # if camp == '全部':
+            #     if type == '1':
+            #         gglist = models.Arrangement.objects.all().order_by('RoomID_id')
+            #     else:
+            #         gglist = models.Arrangement.objects.all().order_by('Enroll')
+            # else:
+            # 按教室编号
+            # if type == '1':
+            #     gglist = models.Arrangement.objects.filter(campus_id=camp).order_by('RoomID_id')
+            # 按容量
+            # else:
+            #     gglist = models.Arrangement.objects.filter(campus_id=camp).order_by('Enroll')
+            # return render(request, 'Summary.html', context={'gglist': gglist})
+        # 打印
+        if flag == 2:
+            print('开始打印')
+            wb = Workbook()  # optimized_write=True
+            sheet_name = '排课简表'
+            print(camp)
+            if camp == '全部':
+
+                basic_obj = models.Arrangement.objects.all()
+            else:
+
+                basic_obj = models.Arrangement.objects.filter(campus_id=camp)
+            w1 = wb.create_sheet('基本信息', 0)
+            name_list1 = ['教室名称', '容量', '星期一 单/双','星期二 单/双','星期二 单/双','星期二 单/双','星期二 单/双','星期二 单/双','星期二 单/双','星期二 单/双','星期三 单/双','星期三 单/双','星期三 单/双','星期三 单/双','星期三 单/双','星期三 单/双','星期三 单/双','星期四 单/双','星期四 单/双','星期四 单/双','星期四 单/双','星期四 单/双','星期四 单/双','星期四 单/双','星期五 单/双','星期五 单/双','星期五 单/双','星期五 单/双','星期五 单/双','星期五 单/双','星期五 单/双','星期六 单/双','星期六 单/双','星期六 单/双','星期六 单/双','星期六 单/双','星期六 单/双','星期六 单/双','星期日 单/双']
+            name_list2=['教室名称','容量','1-2','3-4','5-6','7-8','9-10','11-13','1-2','3-4','5-6','7-8','9-10','11-13','1-2','3-4','5-6','7-8','9-10','11-13','1-2','3-4','5-6','7-8','9-10','11-13','1-2','3-4','5-6','7-8','9-10','11-13','1-2','3-4','5-6','7-8','9-10','11-13','1-2','3-4','5-6','7-8','9-10','11-13']
+            for i in range(1, len(name_list1) + 1):
+                w1.cell(row=1, column=i, value=name_list1[i - 1])
+            for j in range(1, len(name_list2) + 1):
+                w1.cell(row=2, column=j, value=name_list2[j - 1])
+
+            ws = wb.active
+            ws.merge_cells('C1:H1')
+            ws.merge_cells('I1:N1')
+            ws.merge_cells('O1:T1')
+            ws.merge_cells('U1:Z1')
+            ws.merge_cells('AA1:AF1')
+            ws.merge_cells('AG1:AL1')
+            ws.merge_cells('AM1:AR1')
+            # ws.merge_cells(start_row=1, start_column=3, end_row=1, end_column=8)
+            # ws.merge_cells(start_row=1, start_column=5, end_row=1, end_column=9)
+            # ws.merge_cells(start_row=1, start_column=5, end_row=1, end_column=10)
+            # ws.merge_cells(start_row=1, start_column=6, end_row=1, end_column=11)
+            # ws.merge_cells(start_row=1, start_column=7, end_row=1, end_column=12)
+            # ws.merge_cells(start_row=1, start_column=8, end_row=1, end_column=13)
+            # ws.merge_cells(start_row=1, start_column=9, end_row=1, end_column=14)
+            ws.merge_cells(start_row=1, start_column=1, end_row=2, end_column=1)
+            ws.merge_cells(start_row=1, start_column=2, end_row=2, end_column=2)
+            excel_row = 3
+            # 导入mysql中的数据
+            print('___________________________')
+            print(basic_obj)
+            for obj in basic_obj:
+                Mon1_2=Mon3_4=Mon5_6=Mon7_8=Mon9_10=Mon11_13=Tue1_2=Tue3_4=Tue5_6=Tue7_8=Tue9_10=Tue11_13=Wed1_2=Wed3_4=Wed5_6=Wed7_8=Wed9_10=Wed11_13=Thu1_2=Thu3_4=Thu5_6=Thu7_8=Thu9_10=Thu11_13=Fri1_2=Fri3_4=Fri5_6=Fri7_8=Fri9_10=Fri11_13=Sat1_2=Sat3_4=Sat5_6=Sat7_8=Sat9_10=Sat11_13=Sun1_2=Sun3_4=Sun5_6=Sun7_8=Sun9_10=Sun11_13=''
+                print(obj)
+                roomID = obj.RoomID_id
+                enroll = obj.Enroll
+                print(obj.Mon1_2)
+                if obj.Mon1_2 != None:
+                    Mon1_2='√'
+                    print(Mon1_2)
+                if obj.Mon3_4 != None:
+                    Mon3_4 ='√'
+                if obj.Mon5_6 != None:
+                    Mon5_6 ='√'
+                if obj.Mon7_8 != None:
+                    Mon7_8='√'
+                if obj.Mon9_10 != None:
+                    Mon9_10='√'
+                if obj.Mon11_13 != None:
+                    Mon11_13='√'
+                if obj.Tue1_2 != None:
+                    Tue1_2 ='√'
+                if obj.Tue3_4 != None:
+                    Tue3_4 ='√'
+                if obj.Tue5_6 != None:
+                    Tue5_6 ='√'
+                if obj.Tue7_8 != None:
+                    Tue7_8 ='√'
+                if obj.Tue9_10 != None:
+                    Tue9_10 ='√'
+                if obj.Tue11_13 != None:
+                    Tue11_13 ='√'
+                if obj.Wed1_2 != None:
+                    Wed1_2 ='√'
+                if obj.Wed3_4 != None:
+                    Wed3_4 ='√'
+                if obj.Wed5_6 != None:
+                    Wed5_6 ='√'
+                if obj.Wed7_8 != None:
+                    Wed7_8 ='√'
+                if obj.Wed9_10 != None:
+                    Wed9_10 ='√'
+                if obj.Wed11_13 != None:
+                    Wed11_13 ='√'
+                if obj.Thu1_2 != None:
+                    Thu1_2 ='√'
+                if obj.Thu3_4 != None:
+                    Thu3_4 ='√'
+                if obj.Thu5_6 != None:
+                    Thu5_6 ='√'
+                if obj.Thu7_8 != None:
+                    Thu7_8 ='√'
+                if obj.Thu9_10 != None:
+                    Thu9_10 ='√'
+                if obj.Thu11_13 != None:
+                    Thu11_13 ='√'
+                if obj.Fri1_2 != None:
+                    Fri1_2 ='√'
+                if obj.Fri3_4 != None:
+                    Fri3_4 ='√'
+                if obj.Fri5_6 != None:
+                    Fri5_6 ='√'
+                if obj.Fri7_8 != None:
+                    Fri7_8 ='√'
+                if obj.Fri9_10 != None:
+                    Fri9_10 ='√'
+                if obj.Fri11_13 != None:
+                    Fri11_13 ='√'
+                if obj.Sat1_2 != None:
+                    Sat1_2 = '√'
+                if obj.Sat3_4 != None:
+                    Sat3_4 = '√'
+                if obj.Sat5_6 != None:
+                    Sat5_6 = '√'
+                if obj.Sat7_8 != None:
+                    Sat7_8 = '√'
+                if obj.Sat9_10 != None:
+                    Sat9_10 = '√'
+                if obj.Sat11_13 != None:
+                    Sat11_13 = '√'
+                if obj.Sun1_2 != None:
+                    Sun1_2 = '√'
+                if obj.Sun3_4 != None:
+                    Sun3_4 = '√'
+                if obj.Sun5_6 != None:
+                    Sun5_6 = '√'
+                if obj.Sun7_8 != None:
+                    Sun7_8 = '√'
+                if obj.Sun9_10 != None:
+                    Sun9_10 = '√'
+                if obj.Sun11_13 != None:
+                    Sun11_13 = '√'
+                obj_list = [roomID, enroll,Mon1_2,Mon3_4,Mon5_6,Mon7_8,Mon9_10,Mon11_13,Tue1_2,Tue3_4,Tue5_6,Tue7_8,Tue9_10,Tue11_13,Wed1_2,Wed3_4,Wed5_6,Wed7_8,Wed9_10,Wed11_13,Thu1_2,Thu3_4,Thu5_6,Thu7_8,Thu9_10,Thu11_13,Fri1_2,Fri3_4,Fri5_6,Fri7_8,Fri9_10,Fri11_13,Sat1_2,Sat3_4,Sat5_6,Sat7_8,Sat9_10,Sat11_13,Sun1_2,Sun3_4,Sun5_6,Sun7_8,Sun9_10,Sun11_13]
+                for i in range(1, len(obj_list)):
+                    w1.cell(row=excel_row, column=i, value=obj_list[i - 1])
+                excel_row += 1
+            print('ok!')
+            response = HttpResponse(content_type='application/msexcel')
+            response['Content-Disposition'] = 'attachment;filename=%s.xlsx' % sheet_name
+            response['status'] = 100
+            response['msg'] = '打印完成'
+            wb.save('排课简表.xlsx')
+            wb.save(response)
+            return response
     # print("=====Simple函数======")
     # sim_flag = request.session.get('sim_flag')
     # sim_camp=request.session.get('sim_camp')

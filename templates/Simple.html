@@ -61,16 +61,17 @@
                              <label for="id_camp">校区</label>
                                 <select name="camp" id="id_camp"style="width: 20%">
                                     <option value="全部">全部</option>
-                                    <option value='宝山'>宝山</option>
-                                    <option value='嘉定'>嘉定</option>
-                                    <option value='延长'>延长</option>
+                                    {% for l in lllist %}
+                                        <option value='{{ l.CampusId }}'>{{ l.CampName }}</option>
+                                    {% endfor %}
+
                                 </select>
                                 <label for="id_name" style="padding-left: 1%">查询范围:<br></label>
                                     <input type="text" id="id21" style="width: 20%"class="form-control111">
                                     <label for="id_name">至</label>
                                     <input type="text" id="id22" style="width: 20%"class="form-control111">
                                 <button class="btn btn-sm btn-primary" onclick="id_submit1(this)" style="padding-left: 15px;padding-right: 15px">提交</button>
-                               <button  class="btn btn-sm btn-danger" onclick="id_submit2(this)" style="padding-left: 15px;padding-right: 15px" > 打印</button>
+                               <button  class="btn btn-sm btn-danger" onclick="id_submit2(this)" style="padding-left: 15px;padding-right: 15px" >打印</button>
 
 {#                          <button  class="btn btn-sm btn-danger " id="id_reload3">重置</button>#}
                     </div>
@@ -337,48 +338,25 @@
 
     <script>
 
-        $("#id_submit11").click(function () {
-            $.ajax({
-                url: 'Simple_1.html',
-                type: 'post',
-                data: {
-                    'sim_flag': 1,
-                    'sim_camp':$('#id_camp').val(),
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
-                },
-                success: function (data) {
-                    if (data.status == 101) {
-                        {#alert(2)#}
-                        location.href = 'Simple1.html'
-                    } else {
-                        alert(data.msg)
-                        setTimeout(function () {
-                            $(".error").text("")
-                        }, 3000)
-                    }
-                }
-            })
-        })
+
+
         function id_submit1(obj){
 
         {#$("#id_submit1").click(function () {#}
             $.ajax({
 
-                url: 'Simple_1.html',
+                url: 'Simple.html',
                 type: 'post',
                 data: {
-                    'sim_flag': 2,
+                    'flag': 1,
                     'id21': $("#id21").val(),
                     'id22': $("#id22").val(),
-                    'sim_camp':$('#id_camp').val(),
+                    'camp':$('#id_camp').val(),
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success: function (data) {
-                    if (data.status == 101) {
-                        {#alert(2)#}
-                        location.href = 'Simple.html'
-
-                    }
+                    alert('查询完毕')
+                    location.href = 'Simple.html'
                 }
             })
         }
@@ -388,22 +366,20 @@
         {#$("#id_submit1").click(function () {#}
             $.ajax({
 
-                url: 'Simple_1.html',
+                url: 'Simple.html',
                 type: 'post',
                 data: {
-                    'sim_flag': 2,
+                    'flag': 2,
                     'id21': $("#id21").val(),
                     'id22': $("#id22").val(),
-                    'sim_camp':$('#id_camp').val(),
+                    'camp':$('#id_camp').val(),
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success: function (data) {
-                    if (data.status == 101) {
-                        {#alert(2)#}
-                        location.href = 'Simple.html'
-
-                    }
+                    alert('打印完毕')
+                    location.href = 'Simple.html'
                 }
+
             })
         }
 

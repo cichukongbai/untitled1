@@ -607,6 +607,11 @@ def lack(request):
                                             # print(flag)
                                             if flag == 1:
                                                 print('=============')
+
+                                                models.Cou.objects.filter(coID=p['coID'], TEACHNO=p['TEACHNO']).update(
+                                                    F1=q['cname'],
+                                                    flag=1)
+
                                                 # for n in range(1, B[0, 0] + 1):
                                                 temp1 = ''
                                                 temp = B[u, 2]
@@ -635,12 +640,7 @@ def lack(request):
                                                 cursor.execute(sql)
                                                 conn.commit()
 
-                                                sql = "UPDATE app01_Cou set F2='%s' where coID='%s' and TEACHNO='%s';" % (
-                                                    pymysql.escape_string(q['cname']), pymysql.escape_string(p['coID']),
-                                                    pymysql.escape_string(p['TEACHNO']))
-                                                cursor.execute(sql)
-                                                # 提交到数据库执行
-                                                conn.commit()
+
                                                 break
                                             else:
                                                 continue
@@ -698,6 +698,11 @@ def lack(request):
                                     # print(flag)
                                     if flag == 1:
                                         print('=============')
+
+                                        models.Cou.objects.filter(coID=p['coID'], TEACHNO=p['TEACHNO']).update(
+                                            F1=q['cname'],
+                                            flag=1)
+
                                         for n in range(1, B[0, 0] + 1):
                                             temp = B[n, 2]
                                             if B[n, 1] == '':
@@ -722,11 +727,7 @@ def lack(request):
                                             cursor.execute(sql)
                                             # 提交到数据库执行
                                             conn.commit()
-                                            sql = "UPDATE app01_Cou set F1='%s' where coID='%s' and TEACHNO='%s';" % (
-                                                q['cname'], p['coID'], p['TEACHNO'])
-                                            cursor.execute(sql)
-                                            # 提交到数据库执行
-                                            conn.commit()
+
                                     else:
                                         continue
                                     break
@@ -736,7 +737,6 @@ def lack(request):
                 # 紧 处理-----------------------------------------------------------------------
                 elif id_a == 'lack' and id_b == 'not':
                     Handle(id_camp)
-
                     recordcourse1 = models.Cou.objects.filter(TOTALS__gte=0, NOTUSEROOM='0', ROOM_id=type).values(
                         'coID',
                         'TOTALS',
@@ -751,8 +751,11 @@ def lack(request):
                     for p in recordcourse1:
                         if p['TIMESET1'] == None:
                             CheckTimeSet(p['TIMESET'])
+                            print('包含上机')
                         else:
-                            CheckTimeSet(p['TIMESET1'])
+                            CheckTimeSet(p['TIMESET'])
+                            print('不包含上机')
+                        print(B[0,0])
                         if B[0, 0] > 0:
                             require1 = p['TOTALS'] + int(remain)
                             recordroom1 = models.Classroom.objects.filter(capacity__gte=require1, ctype=type,
@@ -788,6 +791,11 @@ def lack(request):
                                     # print(flag)
                                     if flag == 1:
                                         print('=============')
+
+                                        models.Cou.objects.filter(coID=p['coID'], TEACHNO=p['TEACHNO']).update(
+                                            F1=q['cname'],
+                                            flag=1)
+
                                         for n in range(1, B[0, 0] + 1):
                                             temp = B[n, 2]
                                             if B[n, 1] == '':
@@ -806,17 +814,13 @@ def lack(request):
                                                 charset='utf8'
                                             )
                                             cursor = conn.cursor()
-                                            sql = "UPDATE app01_arrangement set %s='%s' where RoomID_id_id='%s';" % (
+                                            sql = "UPDATE app01_arrangement set %s='%s' where RoomID_id='%s';" % (
                                                 temp, temp1, q['cid'])
                                             print("更新数据成功")
                                             cursor.execute(sql)
                                             # 提交到数据库执行
                                             conn.commit()
-                                            sql = "UPDATE app01_Cou set F1='%s' where coID='%s' and TEACHNO='%s';" % (
-                                                q['cname'], p['coID'], p['TEACHNO'])
-                                            cursor.execute(sql)
-                                            # 提交到数据库执行
-                                            conn.commit()
+
                                     else:
                                         continue
                                     break

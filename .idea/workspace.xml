@@ -18,6 +18,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8ae3f5e8-af93-4204-928f-db560651454a" name="Default Changelist" comment="v2.0，十个要求未完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/Arrangement.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/Arrangement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/lack.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/lack.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/NotArrange.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/NotArrange.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Simple.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Simple.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/TempArrange.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/TempArrange.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +95,7 @@
       </set>
     </option>
   </component>
-  <component name="JupyterTrust" id="01823cdb-69a0-4fc0-b8dc-69968ac6ea36" />
+  <component name="JupyterTrust" id="bb34b65a-cdcf-4be3-9188-554cd07deec5" />
   <component name="ProjectId" id="1lQXGF91qUwkGXd0v7j2TR77bjY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -255,6 +261,8 @@
       <workItem from="1628061840982" duration="1721000" />
       <workItem from="1628063583326" duration="335000" />
       <workItem from="1628064159049" duration="1016000" />
+      <workItem from="1628065459090" duration="9826000" />
+      <workItem from="1628128113560" duration="1161000" />
     </task>
     <task id="LOCAL-00001" summary="v2.0 , 未完成10个要求">
       <created>1628061960060</created>
@@ -263,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628061960060</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="v2.0，十个要求未完成">
+      <created>1628065602211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1628065602211</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,45 +309,45 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="v2.0，十个要求未完成" />
     <MESSAGE value="v2.0 , 未完成10个要求" />
-    <option name="LAST_COMMIT_MESSAGE" value="v2.0 , 未完成10个要求" />
+    <MESSAGE value="v2.0，十个要求未完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="v2.0，十个要求未完成" />
   </component>
   <component name="WindowStateProjectService">
     <state x="471" y="121" key="FileChooserDialogImpl" timestamp="1628043684956">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="471" y="121" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1628043684956" />
-    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog" timestamp="1628064432121">
+    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog" timestamp="1628065504614">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1628064432121" />
+    <state x="602" y="323" width="256" height="280" key="Github.ShareDialog/0.0.1366.768@0.0.1366.768" timestamp="1628065504614" />
     <state x="432" y="130" key="Github.UntrackedFilesDialog" timestamp="1628044660316">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="432" y="130" key="Github.UntrackedFilesDialog/0.0.1366.768@0.0.1366.768" timestamp="1628044660316" />
-    <state width="1161" height="256" key="GridCell.Tab.0.bottom" timestamp="1627978991358">
+    <state width="1230" height="162" key="GridCell.Tab.0.bottom" timestamp="1628087446088">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1161" height="256" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1627978991358" />
+    <state width="1230" height="162" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1628087446088" />
     <state width="1398" height="160" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1626251596787" />
     <state width="1398" height="199" key="GridCell.Tab.0.bottom/0.25.1440.790@0.25.1440.790" timestamp="1624523274502" />
-    <state width="1161" height="256" key="GridCell.Tab.0.center" timestamp="1627978991358">
+    <state width="1230" height="162" key="GridCell.Tab.0.center" timestamp="1628087446088">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1161" height="256" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1627978991358" />
+    <state width="1230" height="162" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1628087446088" />
     <state width="1398" height="160" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1626251596785" />
     <state width="1398" height="199" key="GridCell.Tab.0.center/0.25.1440.790@0.25.1440.790" timestamp="1624523274501" />
-    <state width="1161" height="256" key="GridCell.Tab.0.left" timestamp="1627978991358">
+    <state width="1230" height="162" key="GridCell.Tab.0.left" timestamp="1628087446088">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1161" height="256" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1627978991358" />
+    <state width="1230" height="162" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1628087446088" />
     <state width="1398" height="160" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1626251596784" />
     <state width="1398" height="199" key="GridCell.Tab.0.left/0.25.1440.790@0.25.1440.790" timestamp="1624523274501" />
-    <state width="1161" height="256" key="GridCell.Tab.0.right" timestamp="1627978991358">
+    <state width="1230" height="162" key="GridCell.Tab.0.right" timestamp="1628087446088">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1161" height="256" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1627978991358" />
+    <state width="1230" height="162" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1628087446088" />
     <state width="1398" height="160" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1626251596786" />
     <state width="1398" height="199" key="GridCell.Tab.0.right/0.25.1440.790@0.25.1440.790" timestamp="1624523274502" />
     <state width="1228" height="213" key="GridCell.Tab.1.bottom" timestamp="1626774887683">
@@ -360,10 +375,10 @@
     </state>
     <state x="315" y="23" width="998" height="708" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1628059633387" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1623302292295" />
-    <state x="294" y="127" key="Vcs.Push.Dialog.v2" timestamp="1628061968215">
+    <state x="294" y="127" key="Vcs.Push.Dialog.v2" timestamp="1628065611631">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="294" y="127" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1628061968215" />
+    <state x="294" y="127" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1628065611631" />
     <state x="375" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1626249959039">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -380,9 +395,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="503" y="272" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1366.768@0.0.1366.768" timestamp="1628065277813" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1625624074218">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="365" y="167" width="672" height="577" key="search.everywhere.popup" timestamp="1628087061115">
+      <screen x="0" y="0" width="1366" height="768" />
     </state>
+    <state x="365" y="167" width="672" height="577" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1628087061115" />
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1625624074218" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

@@ -57,41 +57,25 @@
 
                                         <div class="form-group" style="width: 33%;">
 {#                                            <p style="color: red;font-size: large">*选择校区</p>#}
-                                                <label >查找类型</label>
-                                                <select name="id_tempclasstype" id="id_tempclasstype" class="form-control" >
-                                                    <option value='教室编号'>教室编号</option>
-                                                    <option value='教室容量'>教室容量</option>
-                                                </select>
-                                        </div>
-                                        <div class="form-group" style="width: 33%;padding-left: 2%">
-                                                <label >查找类型对应参数</label>
-                                                <input type="text" id="id_tempname" class="form-control" placeholder="教室编号/教室容量数">
+                                                <label >教室编号</label>
+                                                <input type="text" id="id_tempclassno" class="form-control" >
                                             </div>
 
-                                        <div class="form-group" style="width: 33%;padding-left: 2%">
-                                                <label >教室类型</label>
-                                                <select name="ctype" id="id_tempctype" class="form-control" >
-                                                    {% for tt in ttlist %}
-                                                    <option value={{ tt.TypeName }}>{{ tt.TypeName }}</option>
-                                                    {% endfor %}
-{#                                                      <option value='多媒体'>多媒体</option>#}
-{#                                                    <option value='语音室'>语音室</option>#}
-{#                                                    <option value='普通教室'>普通教室</option>#}
-                                            </select>
-                                        </div>
 
 
-                                        <div class="form-group" style="width: 33%;">
+
+
+                                        <div class="form-group" style="width: 33%;padding-left: 2%;">
 {#                                            <p style="color: red;font-size: large">*上课时间</p>#}
                                             <label >排课时间</label>
                                                <select name="id_tempweek" id="id_tempweek" class="form-control">
-                                                <option value='星期一'>星期一</option>
-                                                <option value='星期二'>星期二</option>
-                                                <option value='星期三'>星期三</option>
-                                                <option value='星期四'>星期四</option>
-                                                <option value='星期五'>星期五</option>
-                                                <option value='星期六'>星期六</option>
-                                                <option value='星期日'>星期日</option>
+                                                <option value='Mon'>星期一</option>
+                                                <option value='Tue'>星期二</option>
+                                                <option value='Wed'>星期三</option>
+                                                <option value='Thu'>星期四</option>
+                                                <option value='Fri'>星期五</option>
+                                                <option value='Sat'>星期六</option>
+                                                <option value='Sun'>星期日</option>
                                                </select>
                                         </div>
 {#                                        <div class="form-group" style="width: 33%;padding-left: 2%">#}
@@ -121,7 +105,7 @@
                                                </select>
                                             </div>
 
-                                        <div class="form-group"style="width: 33%;padding-left: 2%">
+                                        <div class="form-group"style="width: 33%;">
                                             {#<p style="color: red;font-size: large">*调配次数</p>#}
                                             <label >调配次数</label>
                                             <br>
@@ -134,11 +118,11 @@
 
                                             </select>
                                         </div>
-                                        <div class="form-group" style="width: 100%">
+{#                                        <div class="form-group" style="width: 100%">#}
 {#                                            <p style="color: red;font-size: large">*调配信息</p>#}
-                                            <label >调配信息</label>
-                                                <textarea class="form-control" name="know" id="know" cols="30" rows="10" style="width: 100%;height: 80px"></textarea>
-                                        </div>
+{#                                            <label >调配信息</label>#}
+{#                                                <textarea class="form-control" name="know" id="know" cols="30" rows="10" style="width: 100%;height: 80px"></textarea>#}
+{#                                        </div>#}
                                             <p>注：1、一次临时借用，填写临时占用者和临时占用时间。 2、单周(双周/每周)，填写课程号和教师号。3、若调配信息为空，则将所选时间段的教室安排信息清除。</p>
 
 
@@ -172,14 +156,13 @@
                      'camp1':$('#id_tempcamp').val(),
                      'techno':$('#id_temptechno').val(),
                      'courseno':$('#id_tempcourseno').val(),
-                     'tempclasstype':$('#id_tempclasstype').val(),
-                     'name':$('#id_tempname').val(),
-                     'type':$('#id_tempctype').val(),
+                     'classno':$('#id_tempclassno').val(),
+
                      'week':$('#id_tempweek').val(),
                       {##节数#}
                      'classnum': $('#id_tempclassnum').val(),
                      'num': $('#id_tempnum').val(),
-                     'back':$('#know').val(),
+                     {#'back':$('#know').val(),#}
                      'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 success: function (data) {
