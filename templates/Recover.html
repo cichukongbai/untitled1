@@ -35,24 +35,24 @@
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form" >
-                                    <h4 class="text-center mb-4" >排课系统登录</h4>
+                                    <h4 class="text-center mb-4" >排课系统找回密码</h4>
                                         <div class="form-group">
-                                             <label for="id_name">用户名</label>
-                                               <input type="text" id="id_name" class="form-control"  placeholder="用户名">
+                                             <label for="id_email">邮箱</label>
+                                               <input type="email" id="id_email" class="form-control"  placeholder="邮箱">
 
                                         </div>
-                                        <div class="form-group">
-                                           <label for="id_pwd">密码</label>
-                                             <input type="password" id="id_pwd" class="form-control" placeholder="密码">
-                                        </div>
+{#                                        <div class="form-group">#}
+{#                                           <label for="id_code">验证码</label>#}
+{#                                             <input type="text" id="id_code" class="form-control" placeholder="验证码">#}
+{#                                        </div>#}
                                         <div class="text-center">
-                                             <button class="btn btn-primary btn-block" id="id_login1">登录</button>
+                                             <button class="btn btn-primary btn-block" id="id_login1">确定</button>
                                         </div>
                               <!--  </form>-->
-                                    <div class="new-account mt-3">
-                                       <a class="text-primary" href="./register.html">注册</a>
-                                        <a class="text-primary" href="./Recover.html">找回密码</a>
-                                    </div>
+{#                                    <div class="new-account mt-3">#}
+{#                                       <a class="text-primary" href="./register.html">注册</a>#}
+{#                                        <a class="text-primary" href="./register.html">找回密码</a>#}
+{#                                    </div>#}
 
 
 
@@ -79,17 +79,17 @@
     $("#id_login1").click(function () {
 
         $.ajax({
-            url: 'login.html',
+            url: 'Recover.html',
             type: 'post',
             data: {
-                'name': $("#id_name").val(),
-                'pwd': $("#id_pwd").val(),
+                'email': $("#id_email").val(),
+                {#'code': $("#id_code").val(),#}
                 'csrfmiddlewaretoken': '{{ csrf_token }}',
             },
             success: function (data) {
                 if (data.status == 100) {
-
-                    location.href = 'index.html'
+                        alert(data.msg)
+                    location.href = 'forget.html'
                 } else {
                     alert(data.msg)
                     $(".error").text(data.msg)

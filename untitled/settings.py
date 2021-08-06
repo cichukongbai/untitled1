@@ -140,3 +140,10 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 #需要添加
 AUTH_USER_MODEL = 'app01.UserInfo'
 # AUTH_USER_MODEL = 'users.Users'
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '1084046422@qq.com' # 帐号
+EMAIL_HOST_PASSWORD = 'nqwwdvfagiargbjf' # 密码
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

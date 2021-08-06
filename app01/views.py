@@ -1,8 +1,11 @@
+from random import Random
+
 import pymysql
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 
 from django.contrib.auth.models import *
 from django.db.models import Max
@@ -33,6 +36,7 @@ def register(request):
         reg_form = RegForm(request.POST)
         if reg_form.is_valid():
             clean_data = reg_form.cleaned_data
+            print(clean_data)
             models.UserInfo.objects.create_user(**clean_data)
             response_dic['msg'] = '注册成功'
             response_dic['url'] = '/login/'
@@ -66,6 +70,54 @@ def login(request):
             response_dic['status'] = 101
         return JsonResponse(response_dic)
 
+#随机生成验证码
+# 区分大小写
+def random_str(randomlength=4):
+    str = ''
+    chars = 'abcdefghijklmnopqrstuvwsyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    length = len(chars) - 1
+    random = Random()
+    for i in range(randomlength):
+        str += chars[random.randint(0, length)]
+    return str
+
+# 找回密码
+def recover(request):
+    if request.method == 'GET':
+        return render(request,'Recover.html')
+    else:
+        email = request.POST.get('email')
+        count = models.UserInfo.objects.filter(email=email).count()
+        if count == 1:
+            email_title='找回密码'
+            code = random_str()
+            request.session["email"]=email
+            request.session["code"]=code
+            print(email,code)
+            email_body="验证码为:{0}".format(code)
+            send_status=send_mail(email_title,email_body,'1084046422@qq.com',[email])
+            response_dic = {'status': 100, 'msg': '验证码已发送！'}
+        else:
+            response_dic = {'status': 101, 'msg': '此邮箱不存在！'}
+        return JsonResponse(response_dic)
+def forget(request):
+    if request.method == 'GET':
+        return render(request, 'forget.html')
+    else:
+        code=request.session.get("code")
+        email=request.session.get("email")
+        print(code)
+
+        new_pw = request.POST.get('new_pw')
+        id_code=request.POST.get('id_code')
+
+        if code==id_code:
+            password = make_password(new_pw)
+            User.objects.filter(email=email).update(password=password)
+            response_dic = {'status': 100, 'msg': "修改成功！"}
+        else:
+            response_dic = {'status': 101, 'msg': "验证码不正确！"}
+    return JsonResponse(response_dic)
 
 # 登出
 @login_required(login_url='/login.html')
@@ -442,13 +494,7 @@ def Simple(request):
             ws.merge_cells('AA1:AF1')
             ws.merge_cells('AG1:AL1')
             ws.merge_cells('AM1:AR1')
-            # ws.merge_cells(start_row=1, start_column=3, end_row=1, end_column=8)
-            # ws.merge_cells(start_row=1, start_column=5, end_row=1, end_column=9)
-            # ws.merge_cells(start_row=1, start_column=5, end_row=1, end_column=10)
-            # ws.merge_cells(start_row=1, start_column=6, end_row=1, end_column=11)
-            # ws.merge_cells(start_row=1, start_column=7, end_row=1, end_column=12)
-            # ws.merge_cells(start_row=1, start_column=8, end_row=1, end_column=13)
-            # ws.merge_cells(start_row=1, start_column=9, end_row=1, end_column=14)
+
             ws.merge_cells(start_row=1, start_column=1, end_row=2, end_column=1)
             ws.merge_cells(start_row=1, start_column=2, end_row=2, end_column=2)
             excel_row = 3

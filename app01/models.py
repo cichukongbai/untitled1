@@ -27,6 +27,8 @@ class UserInfo(AbstractUser):
     telephone = models.BigIntegerField(null=True)
     create_date = models.DateField(auto_now_add=True)
     UserType=models.ForeignKey(UserType,null=True, blank=True, on_delete=models.SET_NULL,db_constraint=False)
+    # 校区
+    campus = models.ForeignKey(Campus, null=True, blank=True, on_delete=models.SET_NULL, db_constraint=False)
 
 # 教室
 class Classroom(models.Model):

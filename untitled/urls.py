@@ -30,6 +30,8 @@ urlpatterns = [
      path('login.html',views.login),
      path('index.html', views.index),
      path('register.html',views.register),
+     path('forget.html',views.forget),
+     path('Recover.html',views.recover),
      path('PerAdmin.html',views.PerAdmin),
      path('AlterParameter.html', views.AlterParameter),
      path('AlterPassword.html', views.AlterPassword),
