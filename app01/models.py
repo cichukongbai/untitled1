@@ -154,8 +154,8 @@ class Arrangement(models.Model):
 class Permission(models.Model):
     class Meta:
         permissions=(
-            ('views_app01_manager_tem','管理用户'),
-            ('views_app01_classroom_tem','浏览教室'),
+            ('管理用户','管理用户'),
+            ('浏览教室','浏览教室'),
             ('change_app01_classroom_tem','修改教室'),
             ('view_app01_class_tem','浏览课程'),
             ('change_app01_class_tem','修改课程'),

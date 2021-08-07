@@ -42,6 +42,7 @@
                                                 <th class="py-2">序号</th>
                                                 <th class="py-2">用户</th>
                                                 <th class="py-2">修改</th>
+                                                <th class="py-2">收回</th>
                                             </tr>
                                             </thead>
 
@@ -59,7 +60,10 @@
                                                                 onclick="showDialogPerAdmin(this)">
                                                             修改
                                                         </button>
+                                                        <a class="btn btn-sm btn-danger" onclick="del(this)"> <img
+                                                                src="/static/bootstrap/del.svg" width="20" alt=""/>
 
+                                                            收回</a>
                                                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
                                                              aria-labelledby="myModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
@@ -85,7 +89,10 @@
                                                                             <div class="form-group">
                                                                                 {% for tt in ttlist %}
 
-                                                                                    <input type="checkbox" value="{{ tt.id }}" name="id_type" style="margin-right: 5px;">
+                                                                                    <input type="checkbox"
+                                                                                           value="{{ tt.id }}"
+                                                                                           name="id_type"
+                                                                                           style="margin-right: 5px;">
                                                                                     {{ tt.name }}
 
                                                                                 {% endfor %}
@@ -145,55 +152,67 @@
 
 
         function changePermission(obj) {
-          var permissionList = $('input[name="id_type"]:checked');
-          var permissions = '';
-          $.each(permissionList, function (index, value, array) {
-            if (index+1 == permissionList.length) {  // 最后一位，不加逗号
-              permissions += permissionList[index].value;
-            } else {
-              permissions += permissionList[index].value + ', ';
-            }
-          });
-          $.ajax({
-            url: 'PerAdmin.html',
-            type: 'POST',
-            data: {
-              'id_no': $('#nid').val(),
-              permissions: permissions,
-                'csrfmiddlewaretoken': '{{ csrf_token }}',
-            },
-            success: function (data) {
-              if (data.status == 100) {
-                alert(data.msg);
-                location.href = 'PerAdmin.html';
+            var permissionList = $('input[name="id_type"]:checked');
+            var permissions = '';
+            $.each(permissionList, function (index, value, array) {
+                if (index + 1 == permissionList.length) {  // 最后一位，不加逗号
+                    permissions += permissionList[index].value;
+                } else {
+                    permissions += permissionList[index].value + ', ';
+                }
+            });
+            $.ajax({
+                url: 'PerAdmin.html',
+                type: 'POST',
+                data: {
+                    'flag':1,
+                    'id_no': $('#nid').val(),
+                    permissions: permissions,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+                    if (data.status == 100) {
+                        alert(data.msg);
+                        location.href = 'PerAdmin.html';
 
-              } else if (data.status == 101) {
-                alert(data.msg);
-              }
-            },
-          })
+                    } else if (data.status == 101) {
+                        alert(data.msg);
+                    }
+                },
+            })
         }
 
-        {#$("#id_submit2").click(function () {#}
-            {#var name=JSON.stringify('{{ name.name }}')#}
-        {#    $.ajax({#}
-        {#        url: 'PerAdmin.html',#}
-        {#        type: 'post',#}
-        {#        data: {#}
-        {#            'id_no': $('#nid').val(),#}
-        {#            'id_type': $('input[type=radio][name=id_type]:checked').val(),#}
-        {#            'csrfmiddlewaretoken': '{{ csrf_token }}',#}
-        {#        },#}
-        {#        success: function (data) {#}
-        {#            if (data.status == 100) {#}
-        {#                alert(data.msg)#}
-        {#                location.href = 'PerAdmin.html'#}
-        {#            } else {#}
-        {#                alert(data.msg)#}
-        {#            }#}
-        {#        }#}
-        {#    })#}
-        {#})#}
+        function del(obj) {
+            //点击更新按钮后展示模态框
+            {#$('#myModal').modal('show');#}
+            //获取当前行的所有列
+            var tds = $(obj).parent().parent().find('td');
+            var b = tds.eq(1).text();
+            var id = tds.eq(0).text();
+            $("#nid").val(id);
+            //(".id"):通过class属性获取当前需要填写数据的输入框
+            //$(tds.eq(0)).text():通过下标取得对应列中的值
+            var con;
+            con = confirm('确定要对' + b + '的权限进行操作吗？')
+            if (con == true) {
+
+                $.ajax({
+                url: 'PerAdmin.html',
+                type: 'POST',
+                data: {
+                    'flag':2,
+                    'id_no': $('#nid').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function (data) {
+
+                        location.href = 'DelAdmin.html';
+
+                    }
+            })
+
+            }
+        }
 
     </script>
 

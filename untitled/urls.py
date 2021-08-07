@@ -33,6 +33,7 @@ urlpatterns = [
      path('forget.html',views.forget),
      path('Recover.html',views.recover),
      path('PerAdmin.html',views.PerAdmin),
+     path('DelAdmin.html',views.DelAdmin),
      path('AlterParameter.html', views.AlterParameter),
      path('AlterPassword.html', views.AlterPassword),
 

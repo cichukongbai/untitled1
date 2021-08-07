@@ -168,20 +168,41 @@ def PerAdmin(request):
         return render(request, 'PerAdmin.html', {'gglist': gg_list,'ttlist': tt_list})
     else:
         userid = request.POST['id_no']
+        flag=int(request.POST['flag'])
         print(userid)
-        permissions = request.POST['permissions'].split(', ')
-        if permissions[0] != '':  # 不为空时
-            print(permissions)
-            for index,value in enumerate(permissions):
-                permissions[index]=value  # 将 数字 替换为 上面数组中的 字符串
-            for per in permissions:
-                User.objects.get(nid=userid).user_permissions.add(per)
-            response_dic = {'status': 100, 'msg': '修改权限成功'}
-        else:
-            response_dic = {'status': 101, 'msg': '未选择权限'}
+        if flag ==1:
+            permissions = request.POST['permissions'].split(', ')
+            if permissions[0] != '':  # 不为空时
+                print(permissions)
+                for index,value in enumerate(permissions):
+                    permissions[index]=value  # 将 数字 替换为 上面数组中的 字符串
+                for per in permissions:
+                    User.objects.get(nid=userid).user_permissions.add(per)
+                response_dic = {'status': 100, 'msg': '修改权限成功'}
+            else:
+                response_dic = {'status': 101, 'msg': '未选择权限'}
+        if flag==2:
+            request.session["userid"]=userid
+            response_dic = {'status': 100}
         return JsonResponse(response_dic)
 
-
+def DelAdmin(request):
+    userid = request.session.get('userid')
+    print(type(userid))
+    user = User.objects.get(nid=userid)
+    if request.method == 'GET':
+        gg_list=user.get_all_permissions()
+        # print(gg_list)
+        return render(request,'DelAdmin.html',{'gglist': gg_list})
+    else:
+        permissions = request.POST['permissions'].split(', ')
+        print(permissions)
+        for i in permissions:
+            per=Permission.objects.get(codename=i)
+            print(per)
+            user.user_permissions.remove(per)
+        response_dic = {'status': 100, 'msg': '收回成功！'}
+        return JsonResponse(response_dic)
 # 参数修改
 @login_required(login_url='/login.html')
 def AlterParameter(request):
