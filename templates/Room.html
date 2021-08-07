@@ -215,6 +215,8 @@
                                                                                         <div class="form-group">
                                                                                             <label for="id_type">教室类型</label>
                                                                                             <select name="ctype" id="id_ctype">
+                                                                                            <option>
+                                                                                                        --请选择--</option>
                                                                                                 {% for l in lllist %}
                                                                                                     <option value='{{ l.TypeId }}'>
                                                                                                         {{ l.TypeName }}</option>
@@ -230,6 +232,7 @@
                                                                                                 <label for="id_use" >是否可用</label>
 
                                                                                                  <select name="use" id="id_use">
+                                                                                                        <option>--请选择--</option>
                                                                                                         <option value='是'>是</option>
                                                                                                         <option value='否'>否</option>
                                                                                                  </select>
@@ -241,7 +244,7 @@
                                                                                                 <label for="id_addcamp" >校区</label>
 
                                                                                                  <select name="camp" id="id_addcamp">
-
+                                                                                                <option>--请选择--</option>
                                                                                                 {% for p in palist %}
                                                                                                     <option value='{{ p.CampusId }}'>
                                                                                                         {{ p.CampName }}</option>
@@ -612,7 +615,7 @@ function del(obj)
                     $("#error").text("")
                     location.href = 'Room.html'
                 } else {
-                    alert(data.msg)
+                    alert(data.msg+'已存在')
 
                 }
             }

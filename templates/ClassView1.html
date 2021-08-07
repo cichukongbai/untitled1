@@ -492,7 +492,7 @@ function id_up(obj) {
 
             success: function (data) {
                 if (data.status == 100) {
-                    alert(data.msg)
+                    alert(data.msg+'已存在')
                     location.href = 'ClassView1.html'
                 } else {
                     alert(data.msg)

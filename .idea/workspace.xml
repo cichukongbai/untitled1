@@ -16,13 +16,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ae3f5e8-af93-4204-928f-db560651454a" name="Default Changelist" comment="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码已完成）">
-      <change afterPath="$PROJECT_DIR$/templates/DelAdmin.html" afterDir="false" />
+    <list default="true" id="8ae3f5e8-af93-4204-928f-db560651454a" name="Default Changelist" comment="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码、收回权限已完成）">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app01/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app01/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/PerAdmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/PerAdmin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/ChangeCourse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/ChangeCourse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app01/ChangeRoom.py" beforeDir="false" afterPath="$PROJECT_DIR$/app01/ChangeRoom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/ClassView1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ClassView1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Room.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Room.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +261,7 @@
       <workItem from="1628064159049" duration="1016000" />
       <workItem from="1628065459090" duration="9826000" />
       <workItem from="1628128113560" duration="25395000" />
-      <workItem from="1628298463421" duration="5353000" />
+      <workItem from="1628298463421" duration="7963000" />
     </task>
     <task id="LOCAL-00001" summary="v2.0 , 未完成10个要求">
       <created>1628061960060</created>
@@ -292,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628218957258</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码、收回权限已完成）">
+      <created>1628305857500</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1628305857500</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +333,8 @@
     <MESSAGE value="v2.0，十个要求未完成" />
     <MESSAGE value="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。" />
     <MESSAGE value="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码已完成）" />
-    <option name="LAST_COMMIT_MESSAGE" value="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码已完成）" />
+    <MESSAGE value="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码、收回权限已完成）" />
+    <option name="LAST_COMMIT_MESSAGE" value="（v2.1）课程操作添加、修改未完成；结果查询参数未完成；其他功能均可运行。（通过邮箱找回密码、收回权限已完成）" />
   </component>
   <component name="WindowStateProjectService">
     <state x="471" y="121" key="FileChooserDialogImpl" timestamp="1628043684956">
@@ -391,10 +398,10 @@
     </state>
     <state x="315" y="23" width="998" height="708" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1628059633387" />
     <state x="229" y="86" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1623302292295" />
-    <state x="294" y="127" key="Vcs.Push.Dialog.v2" timestamp="1628218961681">
+    <state x="294" y="127" key="Vcs.Push.Dialog.v2" timestamp="1628305860126">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="294" y="127" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1628218961681" />
+    <state x="294" y="127" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1628305860126" />
     <state x="375" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1626249959039">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -239,18 +239,30 @@ def UploadRoom(request):
             # 创建一个for循环迭代读取xls文件每行数据的, 从第二行开始是要跳过标题行
             for r in range(1, sheet.nrows):
                 cid = sheet.cell(r, 0).value
+                print(cid)
+                aa=models.Classroom.objects.filter(cid=cid)
                 # print(coID)
-                name = sheet.cell(r, 1).value
-                capacity = sheet.cell(r, 2).value
-                ctype_id = sheet.cell(r, 3).value
-                cnum = sheet.cell(r, 4).value
-                cuse = sheet.cell(r, 5).value
-                campus_id = sheet.cell(r, 6).value
-                print(cid, name, capacity, ctype_id, cnum, cuse, campus_id)
-                values = (cid, name, capacity, ctype_id, cnum, cuse, campus_id)
-                # 执行sql语句
-                cursor.execute(query, values)
-                conn.commit()
+                if aa:
+                    response_dic = {'status': 101, 'msg': cid}
+                    return JsonResponse(response_dic)
+                else:
+                    name = sheet.cell(r, 1).value
+                    bb=models.Classroom.objects.filter(cname=name)
+                    if bb:
+                        response_dic = {'status': 101, 'msg': name}
+                        return JsonResponse(response_dic)
+                    else:
+                        capacity = sheet.cell(r, 2).value
+                        ctype_id = sheet.cell(r, 3).value
+                        cnum = sheet.cell(r, 4).value
+                        cuse = sheet.cell(r, 5).value
+                        campus_id = sheet.cell(r, 6).value
+                        print(cid, name, capacity, ctype_id, cnum, cuse, campus_id)
+                        values = (cid, name, capacity, ctype_id, cnum, cuse, campus_id)
+                        # 执行sql语句
+                        cursor.execute(query, values)
+                        conn.commit()
+
             # 关闭游标连接
             cursor.close()
 

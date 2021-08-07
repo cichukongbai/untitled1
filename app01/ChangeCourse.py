@@ -57,29 +57,34 @@ def UploadCourse(request):
                 NAME=sheet.cell(r, 1).value
                 CREDIT=sheet.cell(r, 2).value
                 TEACHNO=sheet.cell(r, 3).value
-                TEACHNAME=sheet.cell(r, 4).value
-                TEACHID=sheet.cell(r, 5).value
-                TIMETEXT=sheet.cell(r, 6).value
-                TIMESET=sheet.cell(r, 7).value
-                F1=sheet.cell(r, 8).value
-                NOTUSEROOM=sheet.cell(r, 9).value
-                TOTALS=sheet.cell(r, 10).value
-                ENROLLS=sheet.cell(r, 11).value
-                flag=sheet.cell(r, 12).value
-                MARK=sheet.cell(r, 13).value
-                DELROLE=sheet.cell(r, 14).value
-                COLLEGEID=sheet.cell(r, 15).value
-                SPECIALITYID=sheet.cell(r, 16).value
-                TIMESET1=sheet.cell(r, 17).value
-                ROOM1=sheet.cell(r, 18).value
-                F2=sheet.cell(r, 19).value
-                ROOM_id=sheet.cell(r, 20).value
-                campus_id=sheet.cell(r, 21).value
-                print(coID,NAME,CREDIT,TEACHNO,TEACHNAME,TEACHID,TIMETEXT,TIMESET,F1,NOTUSEROOM,TOTALS,ENROLLS,flag,MARK,DELROLE,COLLEGEID,SPECIALITYID,TIMESET1,ROOM1,F2,ROOM_id,campus_id)
-                values = (coID,NAME,CREDIT,TEACHNO,TEACHNAME,TEACHID,TIMETEXT,TIMESET,F1,NOTUSEROOM,TOTALS,ENROLLS,flag,MARK,DELROLE,COLLEGEID,SPECIALITYID,TIMESET1,ROOM1,F2,ROOM_id,campus_id)
-                # 执行sql语句
-                cursor.execute(query, values)
-                conn.commit()
+                aa=models.Cou.objects.filter(coID=coID,TEACHNO=TEACHNO)
+                if aa:
+                    response_dic = {'status': 101, 'msg': coID+' '+TEACHNO}
+                    return JsonResponse(response_dic)
+                else:
+                    TEACHNAME=sheet.cell(r, 4).value
+                    TEACHID=sheet.cell(r, 5).value
+                    TIMETEXT=sheet.cell(r, 6).value
+                    TIMESET=sheet.cell(r, 7).value
+                    F1=sheet.cell(r, 8).value
+                    NOTUSEROOM=sheet.cell(r, 9).value
+                    TOTALS=sheet.cell(r, 10).value
+                    ENROLLS=sheet.cell(r, 11).value
+                    flag=sheet.cell(r, 12).value
+                    MARK=sheet.cell(r, 13).value
+                    DELROLE=sheet.cell(r, 14).value
+                    COLLEGEID=sheet.cell(r, 15).value
+                    SPECIALITYID=sheet.cell(r, 16).value
+                    TIMESET1=sheet.cell(r, 17).value
+                    ROOM1=sheet.cell(r, 18).value
+                    F2=sheet.cell(r, 19).value
+                    ROOM_id=sheet.cell(r, 20).value
+                    campus_id=sheet.cell(r, 21).value
+                    print(coID,NAME,CREDIT,TEACHNO,TEACHNAME,TEACHID,TIMETEXT,TIMESET,F1,NOTUSEROOM,TOTALS,ENROLLS,flag,MARK,DELROLE,COLLEGEID,SPECIALITYID,TIMESET1,ROOM1,F2,ROOM_id,campus_id)
+                    values = (coID,NAME,CREDIT,TEACHNO,TEACHNAME,TEACHID,TIMETEXT,TIMESET,F1,NOTUSEROOM,TOTALS,ENROLLS,flag,MARK,DELROLE,COLLEGEID,SPECIALITYID,TIMESET1,ROOM1,F2,ROOM_id,campus_id)
+                    # 执行sql语句
+                    cursor.execute(query, values)
+                    conn.commit()
             # 关闭游标连接
             cursor.close()
 
