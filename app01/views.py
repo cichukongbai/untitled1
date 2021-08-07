@@ -185,7 +185,7 @@ def PerAdmin(request):
             request.session["userid"]=userid
             response_dic = {'status': 100}
         return JsonResponse(response_dic)
-
+#
 def DelAdmin(request):
     userid = request.session.get('userid')
     print(type(userid))
