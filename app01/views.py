@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 
 from django.contrib.auth.models import *
+from model_utils import FieldTracker
 from django.db.models import Max
 from django.shortcuts import render
 
@@ -27,6 +28,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 # 注册
 # Create your views here.
 from app01 import models
+
 from app01.models import UserInfo as User
 # 注册
 def register(request):
@@ -57,9 +59,14 @@ def login(request):
         response_dic = {'status': 100, 'msg': None}
         name = request.POST.get('name')
         pwd = request.POST.get('pwd')
+
         request.session['name'] = name
         print(name)
         user = auth.authenticate(username=name, password=pwd)
+        print(user)
+        currcamp=models.UserInfo.objects.filter(username=name).values('campus_id')
+        print(currcamp[0]['campus_id'])
+        request.session['currcamp'] = currcamp[0]['campus_id']
         # 校验用户
         if user:
             # 如果有值，登陆成功，要login一下
@@ -207,7 +214,9 @@ def DelAdmin(request):
 @login_required(login_url='/login.html')
 def AlterParameter(request):
     print("AlterParameter")
+    # a={}
     if request.method == 'GET':
+        # a.tracker.previous('modelfield')
         return render(request, 'AlterParameter.html')
     else:
         school = request.POST.get('id_name1')
@@ -223,9 +232,9 @@ def AlterParameter(request):
                 if is_Chinese(school)==True:
                     cid = models.Parameter.objects.filter(id=1).values('id')
                     if cid.exists():
-                         models.Parameter.objects.filter(id=1).update(School=school, SYear=year, Semester=seame, Campus_id=colle)
+                         a=models.Parameter.objects.filter(id=1).update(School=school, SYear=year, Semester=seame, Campus_id=colle)
                     else:
-                        models.Parameter.objects.create(id=1,School=school, SYear=year, Semester=seame, Campus_id=colle)
+                        a=models.Parameter.objects.create(id=1,School=school, SYear=year, Semester=seame, Campus_id=colle)
 
                     response_dic = {'status': 100, 'msg': '参数设置成功：'+school+year+seame+colle}
                 else:

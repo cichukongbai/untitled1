@@ -16,10 +16,12 @@ from app01 import models
 def Room(request):
     print("Room")
     # 查询教室信息
-    gg_list = models.Classroom.objects.all()
+    currcamp=request.session['currcamp']
+    gg_list = models.Classroom.objects.filter(campus_id=currcamp)
     ll_list = models.ClassroomType.objects.all()
     pa_list = models.Campus.objects.all()
-    return render(request, 'Room.html', {'gglist': gg_list,'lllist': ll_list,'palist':pa_list})
+
+    return render(request, 'Room.html', {'gglist': gg_list,'lllist': ll_list,'palist':pa_list,'currcamp':currcamp})
 
 # 按类型查询
 @login_required(login_url='/login.html')

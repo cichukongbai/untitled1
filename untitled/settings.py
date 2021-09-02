@@ -120,9 +120,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -145,5 +145,5 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = '1084046422@qq.com' # 帐号
-EMAIL_HOST_PASSWORD = 'nqwwdvfagiargbjf' # 密码
+EMAIL_HOST_PASSWORD = 'ficgkmupsorhbahd' # 密码
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

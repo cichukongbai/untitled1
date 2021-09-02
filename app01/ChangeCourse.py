@@ -102,17 +102,16 @@ def UploadCourse(request):
 @login_required(login_url='/login.html')
 def ClassView1(request):
     print("=======ClassView1======")
-    # camp=request.session.get('camp')
-    gg_list = models.Cou.objects.all()
+    currcamp=request.session.get('currcamp')
+    gg_list = models.Cou.objects.filter(campus_id=currcamp)
     ll_list = models.ClassroomType.objects.all()
     cc_list = models.Campus.objects.all()
-
     pa_list1 = models.Parameter.objects.all().aggregate(Max('id'))
     # 取最新输入的参数
     for item in pa_list1:
         print('pa_list1',pa_list1[item])
         pa_list = models.Parameter.objects.filter(id=pa_list1[item])
-    return render(request, 'ClassView1.html', {'gglist': gg_list, 'palist': pa_list,'lllist': ll_list,'cclist': cc_list,})
+    return render(request, 'ClassView1.html', {'gglist': gg_list, 'palist': pa_list,'lllist': ll_list,'cclist': cc_list})
 
 # 课程删除
 @login_required(login_url='/login.html')

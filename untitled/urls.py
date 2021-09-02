@@ -26,6 +26,7 @@ urlpatterns = [
      # index-3.html中的all-professors.html修改成all-professors/即可
      # path('all-professors/', views.allprofessors),
      #首先进入登录界面
+     path('admin/', admin.site.urls),
      path('', views.login),
      path('login.html',views.login),
      path('index.html', views.index),

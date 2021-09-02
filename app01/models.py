@@ -6,6 +6,7 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+
 #创建数据库
 # 用户类型
 class UserType(models.Model):
